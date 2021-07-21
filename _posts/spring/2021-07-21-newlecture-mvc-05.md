@@ -8,11 +8,6 @@ tags: spring
 comments: true
 ---
 
-<H3> 목차 </H3>
-[TOC]
-
-
-
 #### 문서 출력 방법 4가지
 ---
 
@@ -37,7 +32,8 @@ comments: true
 }
 ```
 
-#### ResponseBody를 통한 문자열 출력
+#### @ResponseBody를 통한 문자열 출력
+---
 
 ```java
     @RequestMapping("index")
@@ -117,7 +113,7 @@ public class NoticeController {
 ![image](https://user-images.githubusercontent.com/66164361/126496649-2ff33bf4-f244-4bbe-84a9-e5159690910b.png)
 
 ### Json 데이터 출력
-
+---
 ![image](https://user-images.githubusercontent.com/66164361/126497529-b9aa6e32-1a32-424e-a0f9-4e76a2332aa8.png)
 
 데이터는 크게 위처럼 3가지 형태로 구분합니다.

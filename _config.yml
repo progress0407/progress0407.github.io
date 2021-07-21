@@ -139,8 +139,3 @@ tipue_search:
     files: [search.html, index.html, tags.html]
     categories: []
     tags: []
-
-# TOC
-toc: true
-toc_sticky: true
-toc_label: "페이지 목차"
