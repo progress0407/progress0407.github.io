@@ -229,4 +229,4 @@ public void addCnt() {
 
 ![8](https://user-images.githubusercontent.com/66164361/126486344-b600448d-9c70-4d64-9d2d-60c74e7e4a25.png)
 
-쓰레드 갯수 1 ~ 8까지는 수행속도가 점점 늘어나며.. 16부터는 거의 같다.
+쓰레드 갯수 1 ~ 8까지는 수행속도가 점점 줄어들며.. 16부터는 거의 같다.
