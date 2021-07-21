@@ -4,7 +4,7 @@ title: "Java Thread 동기화와 정합성, 성능"
 subtitle: "Thread Sync ..."
 date: 2021-07-21 20:30:00 +0900
 categories: backend
-tags: java
+tags: backend-java
 comments: true
 ---
 
