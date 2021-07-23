@@ -209,7 +209,7 @@ public String reg( .. @RequestParam("rd-back-exercise") String rdBackExercise) {
 다음과 같은 방법들을 생각해볼 수 있습니다.
 
 #### 톰캣 인코딩 설정
-```
+```xml
 <Connector port="8080"
            protocol="HTTP/1.1"
            connectionTimeout="20000"
@@ -227,3 +227,5 @@ request.setCharacterEncoding("UTF-8");
 #### 필터 인코딩 설정
 한 프로젝트안에서만 유효하며 모든 서블릿마다 설정해줄 필요 없습니다
 요청/등답이 있을 때마다 실행됩니다
+
+![image](https://user-images.githubusercontent.com/66164361/126655332-22bf4c81-f705-497e-8408-f254b518b0d6.png)

@@ -12,7 +12,7 @@ comments: true
 
 ---
 
-```
+```xml
 <beans ...
 	xmlns:context="http://www.springframework.org/schema/context"
     ...
@@ -34,7 +34,7 @@ comments: true
 
 아래의 xml을 등록한다
 
-```
+```xml
 <context:component-scan base-package="com.newlecture.web.service" />
 ```
 
@@ -46,7 +46,7 @@ controller 와 service만 필요하다면 필요한 범위만 스캔하게끔 �
 Controller도 똑같이 하자
 다만 컨트롤러는 urlMapping을 하기 위해서 아래와 같은 태그를 넣어야 한다
 
-```
+```xml
 <mvc:annotation-driven />
 ```
 

@@ -88,13 +88,13 @@ public class NoticeController {
 
 기존의 `servlet-context.xml` 파일을 열어서
 
-```
+```xml
 <mvc:annotation-driven>
 ```
 
 위 내용을 아래와 같이 수정합니다.
 
-```
+```xml
 <mvc:annotation-driven>
 		<mvc:message-converters> <!-- @ResponseBody로 문자열 한글 처리 -->
 			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
