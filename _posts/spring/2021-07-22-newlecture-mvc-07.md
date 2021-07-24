@@ -103,7 +103,7 @@ multipartFile.transferTo(saveFile);  // 인자로 넘어온 binary file
 @Autowired
 private ServletContext ctx;
 
-public String reg(MultipartFile file, ...) {
+public String reg(MultipartFile file ...) {
 
 	String fileName = file.getOriginalFilename();
 	String webPath = "/static/upload";
@@ -119,3 +119,87 @@ public String reg(MultipartFile file, ...) {
 
 	file.transferTo(saveFile);
 ```
+
+#### 다중으로 업로드할 경우
+
+간단합니다, 아래와 같이 수정합니다.
+
+```html
+<input type="file" name="files" />
+```
+
+```java
+public String reg(MultipartFile[] files ...) {
+
+  for (MultipartFile file : files) {
+    ...
+}
+```
+
+### 공지사항 페이지 준비
+
+```xml
+<definition name="admin.board.*.*" template="/WEB-INF/view/admin/inc/layout.jsp" >
+  <put-attribute name="title" value="관리자 > 공지사항"/>
+  <put-attribute name="header" value="/WEB-INF/view/inc/header.jsp" />
+  <put-attribute name="visual" value="/WEB-INF/view/admin/inc/visual.jsp" />
+  <put-attribute name="aside" value="/WEB-INF/view/admin/inc/aside.jsp" />
+  <put-attribute name="body" value="/WEB-INF/view/admin/board/{1}/{2}.jsp" />
+  <put-attribute name="footer" value="/WEB-INF/view/inc/footer.jsp" />
+</definition>
+```
+
+```java
+@RequestMapping("/admin/board/notice/")
+...
+@RequestMapping("list")
+public String list() {
+return "admin.board.notice.list";
+}
+```
+
+reg의 경우 GET과 POST요청시 처리할 부분을 나누어야 합니다
+
+#### GET / POST 요청 분리
+
+```java
+@Autowired
+private HttpServletRequest request; // 혹은 reg 메서드의 인자로 둡니다
+...
+public String reg(...) {
+    if(request.getMethod().equals("POST")) {
+      ...
+    }
+}
+```
+
+위와 같이 요청 구분을 나누는 방법도 있습니다만 이렇게 하지 않고 아래와 같이 합니다
+
+```java
+@RequestMapping(value="reg", method=RequestMethod.GET)
+public String reg() {
+  return "admin.board.notice.reg";
+}
+
+@RequestMapping(value="reg", method=RequestMethod.POST)
+ public String reg(MultipartFile ...) {
+   ...
+  return "redirect:list";
+}
+```
+
+스프링 4.x 부터는 더 간단한 애노테이션을 제공합니다
+
+```java
+@GetMapping("reg")
+@PostMapping("reg")
+```
+
+#### clean
+
+> tomcat 우클릭 > clean을 하면 배포 디렉터리가 비워진다
+> {워크스페이스}\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\{웹루트}
+> project > clean 은 target 디렉터리가 비워진다
+
+> 배포 디렉터리에는 .class뿐만 아니라 img 등이 들어간다
+> target디렉터리에는 .class파일만 있는것으로 보인다.
