@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "영한킴: spring MVC (1) : 강의 노트"
+title: "영한킴: spring MVC 팁 및 부연설명"
 subtitle: "..."
 date: 2021-07-24 16:00:00 +0900
 categories: backend
@@ -46,8 +46,13 @@ comments: true
   ![image](https://user-images.githubusercontent.com/66164361/126886813-653a0f77-751b-4024-a415-e14f2520a02a.png)  
   ![image](https://user-images.githubusercontent.com/66164361/126886822-0eb58334-4a19-4144-b9d8-9c9a4f7eccf7.png)
 
-- forward: 호출이 서버 내부에서 일어남  
-  redirect: 클라이언트가 호출하게 함  
-  forward는 서버 내부에서 이전 request, reponse을 갖고 내부에서 재호출을 한다. 그렇기에 브라우저 url은 그대로 이다 . 이런 이유로 클라이언트는 전혀 인지하지 못한다.  
-  redirect는 말 그대로 클라이언트가 재호출을 하기 때문에 url이 바뀐다. 새로운 요청이 들어오는 것이므로 이전 request, reponse은 없고 새로 만들어진다.  
+- `forward`: 호출이 서버 내부에서 일어남  
+  `redirect`: 클라이언트가 호출하게 함  
+  `forward`는 서버 내부에서 이전 request, reponse을 갖고 내부에서 재호출을 한다. 그렇기에 브라우저 url은 그대로 이다 . 이런 이유로 클라이언트는 전혀 인지하지 못한다.  
+  `redirect`는 말 그대로 클라이언트가 재호출을 하기 때문에 url이 바뀐다. 새로운 요청이 들어오는 것이므로 이전 request, reponse은 없고 새로 만들어진다.  
   클라이언트가 Status 값 302를 보고 Redirect가 일어났단 것을 알 수 있다
+
+- 코드를 개선하다 보면.. 구조나 디테일을 개선하고 싶을때가 만드시 생긴다고 한다  
+  이때 조급함을 참아야 한다고 한다. 같은 레벨의 것을 먼저 개선 후 그 다음 다른 레벨의 것을 개선한다
+  예를 들어 구조를 개선할 떄는 디테일을 개선하지 아니한다
+  구조 개선 후 테스트가 제대로 동작하면 그 다음 디테일을 개선
