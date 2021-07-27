@@ -158,25 +158,43 @@ GET과 별반 다르지 않습니다. 아래와 같은 등록 화면이 있다�
 
 값을 넘기게끔 바꾸어 줍니다.
 
-
 #### checkbox
+
 ```html
 <tr>
-    <th>좋아하는 등 운동 : select box</th>
-    <td class="text-align-left text-indent text-strong text-orange" colspan="3">
-        <input type="checkbox" name="back-exercises" value="1" id="ch1"><label for="ch1">풀업(턱걸이)</label>
-        <input type="checkbox" name="back-exercises" value="2" id="ch2"><label for="ch2">랫 풀 다운</label>
-        <input type="checkbox" name="back-exercises" value="3" id="ch3"><label for="ch3">원 암 덤벨 로우</label>
-        <input type="checkbox" name="back-exercises" value="4" id="ch4"><label for="ch4">케이블 로우</label>
-        <input type="checkbox" name="back-exercises" value="5" id="ch5"><label for="ch5">인버티드 로우</label>
-        <input type="checkbox" name="back-exercises" value="6" id="ch6"><label for="ch6">시티드 로우</label>
-    </td>
+  <th>좋아하는 등 운동 : select box</th>
+  <td class="text-align-left text-indent text-strong text-orange" colspan="3">
+    <input type="checkbox" name="back-exercises" value="1" id="ch1" /><label
+      for="ch1"
+      >풀업(턱걸이)</label
+    >
+    <input type="checkbox" name="back-exercises" value="2" id="ch2" /><label
+      for="ch2"
+      >랫 풀 다운</label
+    >
+    <input type="checkbox" name="back-exercises" value="3" id="ch3" /><label
+      for="ch3"
+      >원 암 덤벨 로우</label
+    >
+    <input type="checkbox" name="back-exercises" value="4" id="ch4" /><label
+      for="ch4"
+      >케이블 로우</label
+    >
+    <input type="checkbox" name="back-exercises" value="5" id="ch5" /><label
+      for="ch5"
+      >인버티드 로우</label
+    >
+    <input type="checkbox" name="back-exercises" value="6" id="ch6" /><label
+      for="ch6"
+      >시티드 로우</label
+    >
+  </td>
 </tr>
 ```
 
 checkbox, radio 모두 name태그로 그룹임을 식별합니다
 
-``` java
+```java
 public String reg(... @RequestParam("back-exercises") String[] backExercises) {
     for (String backExercise : backExercises) {
         System.out.println(backExercise);
@@ -185,6 +203,7 @@ public String reg(... @RequestParam("back-exercises") String[] backExercises) {
 ```
 
 #### radio box
+
 ```
 <tr>
     <th>좋아하는 등 운동 : select box</th>
@@ -202,13 +221,16 @@ public String reg( .. @RequestParam("rd-back-exercise") String rdBackExercise) {
 ```
 
 ### 한글 설정
+
 ---
+
 ![image](https://user-images.githubusercontent.com/66164361/126653164-e28d5ab6-eafa-432c-93fe-9bf1c506f679.png)
 브라우저는 UTF-8로 설정돼 있는 반면 톰캣의 내장 인코딩으로 ISO-8859-1 를 사용합니다
 
 다음과 같은 방법들을 생각해볼 수 있습니다.
 
 #### 톰캣 인코딩 설정
+
 ```xml
 <Connector port="8080"
            protocol="HTTP/1.1"
@@ -216,16 +238,41 @@ public String reg( .. @RequestParam("rd-back-exercise") String rdBackExercise) {
            redirectPort="8443"
            URIEncoding="UTF-8" />
 ```
+
 단 이 방법은 톰캣 전역 설정이기에.. 해당 톰캣을 사용하는 다른 프로젝트에 영향을 미칩니다
 
 #### 서블릿 인코딩 설정
+
 ```java
 request.setCharacterEncoding("UTF-8");
 ```
+
 이 방법 또한 모든 서블릿마다 설정해주어야 하기 때문에 비효율적입니다.
 
 #### 필터 인코딩 설정
+
 한 프로젝트안에서만 유효하며 모든 서블릿마다 설정해줄 필요 없습니다
 요청/등답이 있을 때마다 실행됩니다
 
 ![image](https://user-images.githubusercontent.com/66164361/126655332-22bf4c81-f705-497e-8408-f254b518b0d6.png)
+
+#### web.xml에 필터 인코딩 설정
+
+```xml
+<filter>
+	<filter-name>charaterEncodingFilter</filter-name>
+	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	<init-param>
+		<param-name>encoding</param-name>
+		<param-value>UTF-8</param-value>
+	</init-param>
+	<init-param>
+		<param-name>forceEncoding</param-name>
+		<param-value>true</param-value>
+	</init-param>
+</filter>
+<filter-mapping>
+	<filter-name>charaterEncodingFilter</filter-name>
+	<url-pattern>/*</url-pattern>
+</filter-mapping>
+```
