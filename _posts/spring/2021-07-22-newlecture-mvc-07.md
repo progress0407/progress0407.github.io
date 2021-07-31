@@ -203,3 +203,38 @@ public String reg() {
 
 > 배포 디렉터리에는 .class뿐만 아니라 img 등이 들어간다
 > target디렉터리에는 .class파일만 있는것으로 보인다.
+
+### 데이터 레이어
+
+![image](https://user-images.githubusercontent.com/66164361/127495535-58bff2e8-4de3-48f8-b27c-2ff053c388c1.png)
+
+컨트롤러, 서비스, Dao의 각 역할을 분리한다.
+Service는 비지니스 스럽게 Dao는 데이터 처리스러운 작업을 한다
+
+![image](https://user-images.githubusercontent.com/66164361/127495741-6c63a3ca-f219-4327-af45-d7bb84fa1a6c.png)
+
+Dao와 테이블은 1:1 관계이며.. 대게 단조롭고 반복적이다
+
+DB와 연결하는 방식(라이브러리)이 몇가지 있다
+
+- 스프링의 Jdbc 라이브러리 : Jdbc 템플릿
+- mybatis
+- JPA의 하이버네이트
+
+![image](https://user-images.githubusercontent.com/66164361/127496263-aaabec9d-07fa-4f7d-b98a-73ce60b13a5f.png)
+
+참고) 간소화된 코드량이다
+
+template 메서드
+
+- `query` 리스트 반환
+- `queryForObject` 단일 객체 반환
+- `queryForList` 하위호환성을 위함
+
+> 보통의 경우 query와 queryForObject 사용하면 된다
+
+```java
+	JdbcTemplate template = new JdbcTemplate();
+	template.setDataSource(dataSource);
+	List<Notice> list = template.query(sql, new BeanPropertyRowMapper<Notice>(Notice.class));
+```
