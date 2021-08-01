@@ -286,3 +286,33 @@ public class Exam {
 - pom.xml > Dependencies 탭 > Add > 커스텀 lib 검색
 
 > 난 이부분이 잘 안된다.. 어짜피 인터넷 안되는 곳에서 쓰는겸.. 그냥 Build Path로 임포트해야겠다 ㅠㅠ
+
+### Maven 을 통해서 Boot 프로젝트 생성
+
+---
+
+우선 가능하다 !
+
+- 메이븐 환경변수 등을 잡아서 cmd에서 실행가능하게 만든후
+- mvn 명령어로 프로젝트 생성
+- 이클립스 maven 임포트
+- pom 파일을 기존의 부트 프로젝트와 같이 가져간다
+- 프로젝트 구조를 기존의 boot 프로젝트와 동일하게
+  - src/main밑에 `resources` 폴더 생성 후 `application.properties` 추가
+- 컨트롤러는 기존의 패키지명 밑에 controller 패키지를 별도로 생성하고 추가해야 된다
+  - 이유는 모르겠다 ㅠ
+
+#### 그 메이븐으로 생성한 부트 프로젝트가 배포가 잘 되는가? : Y; 잘 된다 !
+
+---
+
+하는 법
+
+- 프로젝트 우클릭 > Run As > `Maven Build` > Goal을 `package` 그리고 Finish
+- Target 폴더에 생성된다
+- `java -jar {JAR 파일명}`
+- 확인후 종료
+
+![image](https://user-images.githubusercontent.com/66164361/127774293-4c6acded-edff-41b5-936a-3c80a643ccdb.png)
+
+우와아......
