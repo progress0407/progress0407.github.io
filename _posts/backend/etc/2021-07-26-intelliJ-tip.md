@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "IntelliJ 팁"
-subtitle: "Thread Sync ..."
+subtitle: "..."
 date: 2021-07-26 22:15:00 +0900
-categories: etc
-tags: tip
+categories: backend
+tags: etc
 comments: true
 ---
 
