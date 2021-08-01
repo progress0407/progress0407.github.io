@@ -2,15 +2,13 @@
 layout: post
 title: "뉴렉쳐 메이븐 강의 메모"
 subtitle: "..."
-date: 2021-07-26 22:15:00 +0900
+date: 2021-07-31 22:15:00 +0900
 categories: backend
 tags: etc
 comments: true
 ---
 
-## 뉴렉쳐 메이븐 강의 메모
-
-### Maven
+## Maven
 
 ---
 
@@ -143,7 +141,7 @@ pom.xml 을 수정하자
 
 webapp 밑에 index.html 을 추가하고 run 해서 tomcat 설정을 마치면 실행되는 것을 볼 수 있다
 
-### 흠
+### JSP 라이브러리 추가
 
 ---
 
@@ -286,3 +284,5 @@ public class Exam {
 
 - Maven Repository view 에서 Local Repository > Rebuild Index
 - pom.xml > Dependencies 탭 > Add > 커스텀 lib 검색
+
+> 난 이부분이 잘 안된다.. 어짜피 인터넷 안되는 곳에서 쓰는겸.. 그냥 Build Path로 임포트해야겠다 ㅠㅠ
