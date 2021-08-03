@@ -19,3 +19,5 @@ published: true
 - `create database[또는 schema] {db명} default character set utf8`
 - `create user '{사용자id}' identified by '{비번}'` %를 생략하면 %로 됨 (외부 접근 허용)
 - `grant all privileges on {테이블명}.* to {유저명}`
+- 테이블만들기 > database탭 > reverse engineer
+- 큰 자료형 : TEXT
