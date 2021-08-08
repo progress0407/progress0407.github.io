@@ -21,3 +21,10 @@ published: true
 - `grant all privileges on {테이블명}.* to {유저명}`
 - 테이블만들기 > database탭 > reverse engineer
 - 큰 자료형 : TEXT
+
+---
+
+### 그외 메모한 것
+
+- `select @@autocommit` autocommit 여부 조회 (1 사용, 0 미사용)
+- `set autocommit = {0|1}` 셋팅
