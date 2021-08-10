@@ -73,3 +73,5 @@ published: true
   - 리눅스 배포 + 게스트 호스트 mysql 접근 확인 + 스케쥴링 확인
     - 게스트 : vmware의 내부 os
     - 호스트 : vmware 밖의 내 os
+
+> 참고: https://idchowto.com/?p=11068
