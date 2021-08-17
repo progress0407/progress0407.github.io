@@ -75,3 +75,31 @@ published: true
     - 호스트 : vmware 밖의 내 os
 
 > 참고: https://idchowto.com/?p=11068
+
+## 테이블 생성
+
+> 본 강의 내용은 굉장히 텍스트로 옮기기 힘들기에... 강의 링크만 붙이겠습니다.
+
+ReverseEngineering을 통해서 뒷단에서 작업후  
+Forward-를 통해서 앞으로 가져올 수 있다
+
+Notice 테이블 생성 스크립트
+
+```sql
+CREATE TABLE IF NOT EXISTS `newlecture`.`notice` (
+  `id` INT NOT NULL,
+  `title` VARCHAR(45) NOT NULL,
+  `content` TEXT NULL,
+  `regdate` DATETIME NULL,
+  `hit` INT NULL DEFAULT 0,
+  `pub` BIT NULL DEFAULT FALSE,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+```
+
+![image](https://user-images.githubusercontent.com/66164361/129566325-780351cd-79b7-4d95-a403-a6e421068dcc.png)
+
+테이블 이름을 아무리 부분 대문자로 바꾸려 해도 되지 않음
+
+- lower_case_table_names=1 을 바꾸어도 마찬가지이다
+- 이유는 유닉스기반 파일시스템과 달리 윈도우에서는 대소문자를 구분하지 않기 때문
