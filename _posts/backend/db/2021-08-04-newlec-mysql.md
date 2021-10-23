@@ -2,8 +2,8 @@
 layout: post
 title: newlec MySQL
 subtitle: "..."
-categories: etc
-tags: db
+categories: backend
+tags: database
 comments: true
 published: true
 ---
