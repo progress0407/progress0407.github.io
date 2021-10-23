@@ -1,8 +1,8 @@
 ---
 layout: tag-blog
 title: DataBase
-slug: backend
-category: etc
+slug: database
+category: backend
 menu: false
 order: 4
 ---
