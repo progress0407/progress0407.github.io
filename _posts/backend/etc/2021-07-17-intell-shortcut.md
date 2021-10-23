@@ -2,8 +2,8 @@
 layout: post
 title: "갓IntelliJ IDEA ☆ 단축키 ★"
 subtitle: "..."
-categories: etc
-tags: tip
+categories: backend
+tags: etc
 comments: true
 published: true
 ---
@@ -62,3 +62,5 @@ _인텔리제이는.. 정말 sexy하다.. 마치 this 이탤릭체처럼_
 |         ctrl+alt+O          | optimize import (import문 정리)                                                   |
 |       (in editor) F2        | Error 위치(빨간 줄) 로 이동                                                       |
 |         컬렉션.iter         | for-each문 만들기 (List등의 자료형)                                               |
+|          ctrl + G           | Goto Line : Column                                                                |
+|         ctrl+alt+<-         | Back (이클립스에서 사용했던 기능! 전에 탐색했던 곳으로 돌아가기)                  |

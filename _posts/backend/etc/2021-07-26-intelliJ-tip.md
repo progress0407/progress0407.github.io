@@ -6,6 +6,7 @@ date: 2021-07-26 22:15:00 +0900
 categories: backend
 tags: etc
 comments: true
+published: true
 ---
 
 ## 터미널에서 한글이 깨질때
