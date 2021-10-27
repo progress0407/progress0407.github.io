@@ -2,7 +2,7 @@
 layout: post
 title: "Linux tomcat 구동 : 배포"
 subtitle: "..."
-categories: etc
+categories: backend
 tags: linux
 comments: true
 published: true

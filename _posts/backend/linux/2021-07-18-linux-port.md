@@ -2,7 +2,7 @@
 layout: post
 title: "윈도우, Linux : 포트 확인 및 중지"
 subtitle: "..."
-categories: etc
+categories: backend
 tags: linux
 comments: true
 published: true

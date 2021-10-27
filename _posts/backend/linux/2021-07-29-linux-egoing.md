@@ -2,7 +2,7 @@
 layout: post
 title: 생코 리눅스 관련 메모
 subtitle: "..."
-categories: etc
+categories: backend
 tags: linux
 comments: true
 published: true
