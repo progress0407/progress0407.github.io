@@ -194,6 +194,33 @@ int[] splitArr = Arrays.copyOfRange(array, start, end);
   out.println("Arrays.deepToString(threeDim) = " + Arrays.deepToString(threeDim));
 ```
 
+### 배열의 총 합
+
+문자열 더하기
+예) "123" + "045" = "123045"
+
+```java
+String answer = Arrays.stream(nums).map(String::valueOf).reduce((a, b) -> a + b).orElseGet(()->"");
+```
+
+### 배열의 최댓값
+
+```java
+int[] arr = {19, 14, 10, 17};
+int max = Arrays.stream(arr).max().orElse(-1);
+```
+
+JAVA 8 전 버전일 경우
+
+```java
+int max = arr[0];
+        for (int i = 1; i < n; i++) {
+            max = Math.max(max, arr[i]);
+        }
+```
+
+> 참고: https://stackoverflow.com/questions/31378324/how-to-find-maximum-value-from-a-integer-using-stream-in-java-8/31378866
+
 ## 형 (Type)
 
 자바는 Integer와 int가 다르며 당연하게도 '1'과 "1" 등 문자와 문자열의 1도 다르다
@@ -208,3 +235,34 @@ char a = '3';
 out.println(a - '0');
 //'3' - '0'
 ```
+
+### int를 char[] 로
+
+```java
+int i = 1234;
+char[] chars = ("" + i).toCharArray();
+// 혹은
+String.valueOf(1234).toCharArray();
+```
+
+> 참고: https://stackoverflow.com/questions/12192805/convert-an-integer-to-an-array-of-characters-java
+
+### int[] 를 Integer[]로
+
+```java
+Integer[] nums = IntStream.of(numbers).boxed().toArray(Integer[]::new);
+// 혹은
+Integer[] nums = Arrays.stream(numbers).boxed().toArray(Integer[]::new);
+```
+
+> 참고: https://stackoverflow.com/questions/880581/how-to-convert-int-to-integer-in-java
+
+### int[] 를 List<Integer> 로
+
+```java
+int[] ints = {1, 2, 3};
+List<Integer> intList = new ArrayList<Integer>(ints.length);
+for (int i : ints) intList.add(i);
+```
+
+> 참고: https://stackoverflow.com/questions/1073919/how-to-convert-int-into-listinteger-in-java
