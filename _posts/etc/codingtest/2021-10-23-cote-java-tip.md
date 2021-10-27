@@ -175,8 +175,8 @@ int[] splitArr = Arrays.copyOfRange(array, start, end);
 
 ```java
   int[] oneDime = {11, 22, 33};
-  int[][] twoDim =  {{1, 2, 3}, {4, 5, 6}};
-  int[][][] threeDim = {{{1, 2, 3}, {4, 5, 6}}, {{7, 8, 9}, {10, 11, 12}}};
+  int[][] twoDim = {% raw %}{{1, 2, 3}, {4, 5, 6}}{% endraw %};
+  int[][][] threeDim = { { {1, 2, 3}, {4, 5, 6} }, { {7, 8, 9}, {10, 11, 12} } };
 
   for (int i = 0; i < 2; i++) {
       for (int j = 0; j < 3; j++) {
@@ -193,6 +193,14 @@ int[] splitArr = Arrays.copyOfRange(array, start, end);
 
   out.println("Arrays.deepToString(threeDim) = " + Arrays.deepToString(threeDim));
 ```
+
+블로그를 기술하면서 깨달은 것인데...
+
+이중 중괄호의 앞글자를 붙어 쓰면 Liquid Exception이 뜬다 !!!
+
+![image](https://user-images.githubusercontent.com/66164361/138990719-8ea5a8ef-cf30-4cf5-bf19-4710d9515229.png)
+
+블로그를 올리는데 이 고생을 해야 한다니.. ㅠㅠ
 
 ### 배열의 총 합
 
@@ -214,9 +222,9 @@ JAVA 8 전 버전일 경우
 
 ```java
 int max = arr[0];
-        for (int i = 1; i < n; i++) {
-            max = Math.max(max, arr[i]);
-        }
+for (int i = 1; i < n; i++) {
+    max = Math.max(max, arr[i]);
+}
 ```
 
 > 참고: https://stackoverflow.com/questions/31378324/how-to-find-maximum-value-from-a-integer-using-stream-in-java-8/31378866
@@ -230,19 +238,19 @@ int max = arr[0];
 ### '3'을 (int) 3으로
 
 ```java
-char a = '3';
+    char a = '3';
 
-out.println(a - '0');
-//'3' - '0'
+    out.println(a - '0');
+    //'3' - '0'
 ```
 
 ### int를 char[] 로
 
 ```java
-int i = 1234;
-char[] chars = ("" + i).toCharArray();
-// 혹은
-String.valueOf(1234).toCharArray();
+    int i = 1234;
+    char[] chars = ("" + i).toCharArray();
+    // 혹은
+    String.valueOf(1234).toCharArray();
 ```
 
 > 참고: https://stackoverflow.com/questions/12192805/convert-an-integer-to-an-array-of-characters-java
@@ -250,9 +258,9 @@ String.valueOf(1234).toCharArray();
 ### int[] 를 Integer[]로
 
 ```java
-Integer[] nums = IntStream.of(numbers).boxed().toArray(Integer[]::new);
-// 혹은
-Integer[] nums = Arrays.stream(numbers).boxed().toArray(Integer[]::new);
+    Integer[] nums = IntStream.of(numbers).boxed().toArray(Integer[]::new);
+    // 혹은
+    Integer[] nums = Arrays.stream(numbers).boxed().toArray(Integer[]::new);
 ```
 
 > 참고: https://stackoverflow.com/questions/880581/how-to-convert-int-to-integer-in-java
@@ -260,9 +268,9 @@ Integer[] nums = Arrays.stream(numbers).boxed().toArray(Integer[]::new);
 ### int[] 를 List<Integer> 로
 
 ```java
-int[] ints = {1, 2, 3};
-List<Integer> intList = new ArrayList<Integer>(ints.length);
-for (int i : ints) intList.add(i);
+    int[] ints = {1, 2, 3};
+    List<Integer> intList = new ArrayList<Integer>(ints.length);
+    for (int i : ints) intList.add(i);
 ```
 
 > 참고: https://stackoverflow.com/questions/1073919/how-to-convert-int-into-listinteger-in-java
