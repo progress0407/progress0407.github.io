@@ -1,8 +1,8 @@
 ---
 layout: tag-blog
-title: Tip
-slug: tip
+title: 버전관리(VCS)
+slug: github
 category: etc
 menu: false
-order: 5
+order: 1
 ---

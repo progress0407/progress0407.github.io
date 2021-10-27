@@ -1,6 +1,6 @@
 ---
 layout: list
-title: BackEnd
+title: Back-end
 slug: backend
 menu: true
 submenu: true

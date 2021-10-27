@@ -2,7 +2,7 @@
 layout: tag-blog
 title: Linux
 slug: linux
-category: etc
+category: backend
 menu: false
 order: 4
 ---

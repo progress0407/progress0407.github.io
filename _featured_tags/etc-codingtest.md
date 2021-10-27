@@ -4,5 +4,5 @@ title: Coding Test
 slug: codingtest
 category: etc
 menu: false
-order: 4
+order: 3
 ---
