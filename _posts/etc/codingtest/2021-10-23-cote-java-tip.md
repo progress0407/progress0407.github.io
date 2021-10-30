@@ -274,3 +274,32 @@ for (int i = 1; i < n; i++) {
 ```
 
 > 참고: https://stackoverflow.com/questions/1073919/how-to-convert-int-into-listinteger-in-java
+
+### 반대로 출력
+
+예를들어
+
+- '1'을 '0'으로 혹은 그 반대로
+- A는 Z로, B는 Y로 .. (Z까지) 혹은 그 반대로
+
+위와 같은 상황을 처리하고 싶을 때가 있다
+
+그럴때는 아래와 같이 작성하면 된다
+
+```java
+(char) ('1' - chs[j] + '0')
+(char) ('Z' - i + 'A')
+(char) ('z' - i + 'a')
+```
+
+### while 반복문시 조건들은 다 while 조건 안에
+
+```java
+while (end + 1 < chs.length && chs[end] == chs[end + 1]) end++;
+```
+
+위와 같이 특정 index를 넘기지 않고자 할 때는 가장 앞에 선언한다
+
+P and Q 구조 이기 때문에 P가 false일때 뒤 조건을 검사하지 않는다
+
+그래서 `ArrayIndexOutOfBoundsException`와 같은 코테시 머리 아픈 예외가 나오지 않는다
