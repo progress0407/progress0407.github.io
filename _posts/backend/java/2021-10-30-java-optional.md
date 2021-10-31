@@ -109,7 +109,17 @@ static class Member {
 - `VO`에서 `Optional`은 `return`할때 사용한다 (`get`)
 - 필드에는 `Optional`을 사용하지 말자
 
+## 느낀점
+
+---
+
+아직 확실히 `Optional`을 부여잡지 못했다.. 설계의도가 개발자들이 생각했었던 의도와 다른 점들이 많은 것 같다
+
+dzone에 26가지 경우에 대한 가이드가 있는데 나중에 확실히 알아보도록 하자
+
 > 참고  
 > https://homoefficio.github.io/2019/10/03/Java-Optional-%EB%B0%94%EB%A5%B4%EA%B2%8C-%EC%93%B0%EA%B8%B0/ ★★  
 > https://stackoverflow.com/questions/38725445/optional-get-without-ispresent-check  
 > https://cfdf.tistory.com/34 ★ 회원가입 예제
+> https://dzone.com/articles/using-optional-correctly-is-not-optional ★★ `Optional` 가이드  
+> https://stackoverflow.com/questions/26327957/should-java-8-getters-return-optional-type/26328555#26328555 ★★ `Optional` 설계자 답변
