@@ -9,8 +9,9 @@ philz:
   # Markdown enabled, can use multiple paragraphs (enabled by `|`)
   # 자기 소개
   about:             |
-    안녕하세요 ! 난 필즈에요
-    저는 가짜 개발자입니다 진짜가 되기 위해 수련하고 있습니다 !
+    안녕하세요 ! 필즈입니다  
+    조금씩 앞으로 나아가고 있는 가짜 개발자입니다  
+    언젠가는 진짜가 되기 위하여 정진하고 있습니다
 
 
   # This photo will be used in the about section
@@ -25,7 +26,7 @@ philz:
   # Comment/uncommet to show/hide
   # Icons appear in order, can be rearranged:
   social:
-    facebook:         khw11044
+    facebook:         progress0407
     # twitter:         <username>
     # google:          <number>
     # vk:              <username>
@@ -61,7 +62,7 @@ philz:
     # stumbleupon:     <username>
     # paypal:          <username>
     email:           progress0407@gmail.com
-    rss:             https://khw11044.github.io/feed.xml
+    rss:             https://progress0407.github.io
 
 # Another author
 author2:
