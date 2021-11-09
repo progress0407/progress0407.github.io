@@ -12,7 +12,7 @@ published: true
 
 ## Checkout
 
-`git bran`
+`git bran초`
 
 - 브랜치를 생성함과 동시에 그 브랜치로 전환한다.
 - 예) `git checkout -b number-to-alphabet`
@@ -89,3 +89,29 @@ hash를 찾은 이후 이후 아래 명령어 진행
 
 - 명령어로 인해 실수로 hard reset 했을 때 등의 복구 수단
 - git 명령어를 사용한 이력
+
+# 기타 상황들
+
+---
+
+## 만일 push된 커밋내용을 --amend로 바꾸고자 한다면?
+
+```bash
+git commit --amend
+```
+
+로 커밋내용 변경후에 `push`를 하게 되면
+
+![image](https://user-images.githubusercontent.com/66164361/140637406-83101919-3169-4e24-ab96-2136f18a2d47.png)
+
+위와 같은 에러 메세지가 나온다
+
+그래서 아래처럼 옵션을 붙여주자
+
+```bash
+git push -f
+```
+
+강제 수행이 된다
+
+다만 이 명령어는 위험하니.. 최대한 커밋내역이 꼬일 일이 없는 혼자 쓰는 공간에서 사용하는게 좋을 것 같다
