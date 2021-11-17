@@ -30,5 +30,27 @@ comments: true
 
 ### 그외
 
+---
+
 - 너무 자주 인터페이스를 만들지 말아라
   - 너무 자주 만들 경우 정리 되지 않는 인터페이스들이 남게 된다
+
+### 자동차 경주 게임 구현 도중 indent
+
+---
+
+![image](https://user-images.githubusercontent.com/66164361/142017242-341e5226-6a91-4315-8b24-3c20a387dd42.png)
+
+위와 같이 indent를 더 이상 줄이기 힘들다고 판단되는 곳까지 왔다
+
+사실 본인은 indent를 1로 만드는 것이 더이상 불가능하다고 생각했다
+
+그러나.. 갓텔리제이가 힌트를 주기를...
+
+![image](https://user-images.githubusercontent.com/66164361/142017625-640925cb-3b66-4edd-aaec-632c10181fe8.png)
+
+이것을 `do while`문으로 바꿔보지 않겠는가 라고 계시를 내려주었다
+
+![image](https://user-images.githubusercontent.com/66164361/142017793-fd9fc0d8-0e70-4c9d-b5d0-863372e675ed.png)
+
+역시 갓텔리제이다
