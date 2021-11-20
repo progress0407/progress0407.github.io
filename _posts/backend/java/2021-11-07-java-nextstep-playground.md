@@ -28,7 +28,7 @@ comments: true
 - 3. Refactor
   - 프로덕션 코드를 리펙터링한다
 
-### 그외
+### 그외 메모
 
 ---
 
@@ -44,6 +44,38 @@ comments: true
     - 변경지점이 한곳으로만 갈 수 있게끔 설계하자
 
 - 테스트를 위해서 생성자 추가하는 것도 나쁘지 않다
+
+### 문법적인 사항
+
+---
+
+- Shape이 조상 Line이 자손이라 했을 때 조상에서
+
+```java
+Shape(List<Point> points) {
+  this.points = points;
+}
+```
+
+와 같이 생성자 주입 받는 것을 자손객체가 해당 기능을 물려받지 않는다
+
+혹은 자손에서
+
+```java
+Line(List<Point> points) {
+  super();
+}
+```
+
+라고 하여도 조상에만 반영이 된다.
+
+항상 하듯이 아래처럼 해주어야 한다.
+
+```java
+Line(List<Point> points) {
+  this.points = points;
+}
+```
 
 ### 자바 컨벤션
 
