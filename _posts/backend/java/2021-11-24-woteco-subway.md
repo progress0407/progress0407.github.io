@@ -93,3 +93,37 @@ private static void deleteStation() {
 ```
 
 짜잔.. 이제 `null`을 리턴하거나 하는 불상사를 막을 수 있다
+
+## 불변 클래스는 불변 보장이라 수정이 안됀다 ! 다메다메~
+
+---
+
+문제는 아래 상황이다
+
+![image](https://user-images.githubusercontent.com/66164361/143199890-0a8a20dd-b827-457b-af71-6e0196843daa.png)
+
+![image](https://user-images.githubusercontent.com/66164361/143199630-61c82317-c4b5-44d4-84ff-9518db191717.png)
+
+도메인 객체에 값을 추가하려는 것인데
+
+```
+java.lang.UnsupportedOperationException
+```
+
+라는 예외가 발생한 것
+
+흔히 불변성을 지니는 컬렉션을 조작하려고 했을때 나오는 메세지이다
+
+`List.of` 내부 코드를 보도록 하자
+
+![image](https://user-images.githubusercontent.com/66164361/143200070-0af34e24-e61a-4614-86b9-29a0634bb8cc.png)
+
+위와 같은 점도 있고..
+
+그러나 가장 확실한 이유를 찾았다...
+
+![image](https://user-images.githubusercontent.com/66164361/143203621-503d355a-c8c4-44fc-8327-5c93d28cb8ef.png)
+
+get으로 꺼내온 것은 수정할 이유가 없다는 이유로 위의 불변성을 선언한건데..
+
+이게 문제가 된 것이었다.. 하하하 !!
