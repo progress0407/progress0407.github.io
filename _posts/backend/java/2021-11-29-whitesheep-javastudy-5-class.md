@@ -122,14 +122,14 @@ init(int)
 init.number = 50
 ```
 
-### 클래스 앞에..
+## 클래스 앞에..
 
 - 인스턴스의 생성을 막을 때는 `abstract`를 쓰고
 - 상속을 막을 때는 `final`을 쓴다
   - 언제 막는가? `String` 등이 하는 일로 상수풀에서 값을 가져오는 등의 일을 하는데
     Overloading을 해서 이 객체의 행위가 망가지는 것을 막기 위하여 `final`을 사용한다고 볼 수 있다.
 
-### 퀴즈!
+## 퀴즈!
 
 - 기선님 유튭에 나온 어느 분이 올린 퀴즈(?) 이다
 
@@ -170,7 +170,7 @@ classQuiz.y = 0
 
 static이 실행되는 시점에 x는 기본값(0)으로 취급되어 if문을 통과하지 못한 것이다
 
-### Local Class 란 것도 있다
+## Local Class 란 것도 있다
 
 한 메서드 안에 class를 정의하여 사용할 수 있다..
 
@@ -217,7 +217,7 @@ public class InceptionClass {
 
 위와 같다
 
-### 저장되는 영역
+## 각 변수의 종류에 따라 저장되는 영역
 
 |     종류      |          생성시기           |       소멸시기       | 저장메모리  |
 | :-----------: | :-------------------------: | :------------------: | :---------: |
@@ -225,7 +225,7 @@ public class InceptionClass {
 | 인스턴스 변수 |    인스턴스가 생성될 때     | 인스턴스가 소멸할 떄 |  heap 영역  |
 |   지역 변수   |  블록 내 변수를 선언할 때   |   블록을 벗어날 때   | stack 영역  |
 
-### 리플렉션 소개
+## 리플렉션 소개
 
 다른 클래스의 정보를 가져올 수 있다
 
@@ -245,7 +245,7 @@ for (Field declaredField : declaredFields) {
 > Relfection을 이용한 엑셀 개발  
 > https://techblog.woowahan.com/2698/
 
-### 추상클래스와 인터페이스는 어떨 때 쓰면 좋을까?
+## 추상클래스와 인터페이스는 어떨 때 쓰면 좋을까?
 
 8버전 이후 `default` 메서드 등의 구현이 가능하기 때문에 추상클래스의 입지는 약해졌다고 볼 수 있다
 
@@ -253,7 +253,7 @@ for (Field declaredField : declaredFields) {
 
 스프링에서도 추상클래스에서 인터페이스로 옮긴 코드가 많다고 하셨다
 
-### IntelliJ 상속(오버라이드), 구현 표시
+## IntelliJ 상속(오버라이드), 구현 표시
 
 - 상속
 
@@ -263,7 +263,134 @@ for (Field declaredField : declaredFields) {
 
 ![image](https://user-images.githubusercontent.com/66164361/144050780-6609d9f1-59b2-4337-8b73-b1d9bfa7fbb0.png)
 
-### 과제가 이진탐색..?
+## 더블 디스 패치 패턴을 이용한 것
+
+- DomParser
+- SaxParser (Simple)
+
+## Clonable을 통해 살펴보는 얕은 복사, 깊은 복사
+
+얕복과 깊복을 알아보자!!
+
+객체의 기본적 개념을 안다면 알겠지만 !! 아래와 같은 경우는 얕은 복사이다
+
+예제 구조
+
+```java
+public class CloneableMain {
+
+	public static void main(String[] args) {...};
+
+	static class Car {...}
+}
+```
+
+```java
+static class Car {
+	private String name;
+
+	public Car(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Car{" +
+			"name='" + name + '\'' +
+			'}';
+	}
+}
+```
+
+```java
+public static void main(String[] args) {
+	Car car1 = new Car("aa");
+	System.out.println("car1 = " + car1);
+
+	Car car2 = car1;
+	car2.setName("aa_2");
+	System.out.println("car1 = " + car1);
+	System.out.println("car2 = " + car2);
+	System.out.println("car1 = " + car1.hashCode());
+	System.out.println("car2 = " + car2.hashCode());
+}
+```
+
+위와 같이 실행하면 결과는 아래와 같다
+
+```
+car1 = Car{name='aa'}
+car1 = Car{name='aa_2'}
+car2 = Car{name='aa_2'}
+car1 = 1121172875
+car2 = 1121172875
+```
+
+그리고 깊은복사를 하고 싶으면 우선 **`Clonealbe`** 을 상속받아야 한다
+
+안그러면 `CloneNotSupportedException` 이 터진다
+
+그리고 `clone` 메서드를 인텔리제이의 도움을 받아 오버라이딩하자
+
+```java
+static class Car implements Cloneable{
+	@Override
+		protected Object clone() throws CloneNotSupportedException {
+			return super.clone();
+		}
+}
+```
+
+실행부
+
+```java
+	public static void main(String[] args) {
+		Car car1 = new Car("aa");
+		System.out.println("car1 = " + car1);
+
+		Car car3 = null;
+		try {
+			car3 = (Car)car1.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		car3.setName("aa3");
+		System.out.println("car1 = " + car1);
+		System.out.println("car3 = " + car3);
+		System.out.println("car1.hashCode() = " + car1.hashCode());
+		System.out.println("car3.hashCode() = " + car3.hashCode());
+	}
+```
+
+실행결과
+
+```
+car1 = Car{name='aa'}
+car1 = Car{name='aa'}
+car3 = Car{name='aa3'}
+car1.hashCode() = 649734728
+car3.hashCode() = 610984013
+```
+
+## 다이나믹 메소드 디스패치
+
+필자는 다형성의 핵심 원리라고 생각했다..
+
+인터페이스의 메서드를 어떤 구현체의 메서드가 담당할 지를 결정한다고 볼 수 있다
+
+런타임시에 결정된다고 볼 수 있다
+
+## 과제가 이진탐색 ?!
+
+### 그래서 "탐색"만 구현해 보았다
 
 ---
 
@@ -294,6 +421,7 @@ public class BinaryTree {
 		}
 
 		public int getValue() {
+
 			return value;
 		}
 
