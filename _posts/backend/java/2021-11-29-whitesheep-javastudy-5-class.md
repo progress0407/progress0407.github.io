@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[스터디할래] whitesheep #5 클래스"
+title: "[스터디할래] whitesheep #5 클래스 ~ #6 상속"
 subtitle: ""
 date: 2021-11-29 00:10:00 +0900
 categories: backend
@@ -225,6 +225,44 @@ public class InceptionClass {
 | 인스턴스 변수 |    인스턴스가 생성될 때     | 인스턴스가 소멸할 떄 |  heap 영역  |
 |   지역 변수   |  블록 내 변수를 선언할 때   |   블록을 벗어날 때   | stack 영역  |
 
+### 리플렉션 소개
+
+다른 클래스의 정보를 가져올 수 있다
+
+(mysql 등 )드라이버 로딩할 때 사용하던 것도 리플렉션이다 ! ㅎ
+
+```java
+Field[] declaredFields = Class.forName("test.grammer.reflection.RefObject").getDeclaredFields();
+for (Field declaredField : declaredFields) {
+	out.println(declaredField);
+}
+```
+
+메타 정보를 이용해서 정보를 가져오므로 우리가 자주사용하는 문장들보다는 느리다
+
+그러나 성능에 크리티컬한 정도는 아니다 !
+
+> Relfection을 이용한 엑셀 개발  
+> https://techblog.woowahan.com/2698/
+
+### 추상클래스와 인터페이스는 어떨 때 쓰면 좋을까?
+
+8버전 이후 `default` 메서드 등의 구현이 가능하기 때문에 추상클래스의 입지는 약해졌다고 볼 수 있다
+
+추상클래스가 필요 없는 경우가 많다..
+
+스프링에서도 추상클래스에서 인터페이스로 옮긴 코드가 많다고 하셨다
+
+### IntelliJ 상속(오버라이드), 구현 표시
+
+- 상속
+
+![image](https://user-images.githubusercontent.com/66164361/144050529-890268d1-93e7-49a8-b717-e35d95d774bc.png)
+
+- 구현
+
+![image](https://user-images.githubusercontent.com/66164361/144050780-6609d9f1-59b2-4337-8b73-b1d9bfa7fbb0.png)
+
 ### 과제가 이진탐색..?
 
 ---
@@ -236,6 +274,107 @@ public class InceptionClass {
 Insert하는 로직은 오래걸릴 것 같고,
 
 정렬이 되어 있다는 전제하에서 로직을 설계해 보자
+
+```java
+public class BinaryTree {
+
+	static class Node {
+		private int value;
+		private Node leftNode;
+		private Node rightNode;
+
+		public Node(int value) {
+			this.value = value;
+		}
+
+		public Node(int value, Node leftNode, Node rightNode) {
+			this.value = value;
+			this.leftNode = leftNode;
+			this.rightNode = rightNode;
+		}
+
+		public int getValue() {
+			return value;
+		}
+
+		public Node getLeftNode() {
+			return leftNode;
+		}
+
+		public Node getRightNode() {
+			return rightNode;
+		}
+	}
+
+	public static void main(String[] args) {
+		Node root = getNode();
+		System.out.println("DFS: ");
+		BinaryTree.searchByDfs(root);
+		System.out.println("\n\nBFS: ");
+		BinaryTree.searchByBfs(root);
+		System.out.println();
+	}
+
+	private static void searchByBfs(Node node) {
+		Queue<Node> queue = new LinkedList<>();
+		queue.offer(node);
+		do {
+			Node poll = queue.poll();
+			if (poll == null) {
+				continue;
+			}
+			System.out.print(poll.getValue() + " ");
+			Node leftNode = poll.getLeftNode();
+
+			if (leftNode != null) {
+				queue.offer(leftNode);
+			}
+
+			Node rightNode = poll.getRightNode();
+			if (rightNode != null) {
+				queue.offer(rightNode);
+			}
+		} while (!queue.isEmpty());
+	}
+
+	private static Node getNode() {
+		Node leftOfLeftOfLeftNode = new Node(1);
+		Node leftOffLeftNode = new Node(2, leftOfLeftOfLeftNode, null);
+		Node rightOfLeftNode = new Node(4);
+		Node leftNode = new Node(3, leftOffLeftNode, rightOfLeftNode);
+
+		Node rightOfLeftOfRightNode = new Node(9);
+		Node leftOfRightNode = new Node(8, null, rightOfLeftOfRightNode);
+		Node rightOfRightNode = new Node(10, null, null);
+		Node rightNode = new Node(7, leftOfRightNode, rightOfRightNode);
+
+		Node root = new Node(5, leftNode, rightNode);
+		return root;
+	}
+
+	private static void searchByDfs(Node node) {
+		System.out.print(node.getValue() + " ");
+		Node leftNode = node.getLeftNode();
+		Node rightNode = node.getRightNode();
+		if (leftNode != null) {
+			searchByDfs(leftNode);
+		}
+		if (rightNode != null) {
+			searchByDfs(rightNode);
+		}
+	}
+}
+```
+
+실행결과는 아래와 같다
+
+```
+DFS:
+5 3 2 1 4 7 8 9 10
+
+BFS:
+5 3 7 2 4 8 10 1 9
+```
 
 ### 참고한 곳
 
