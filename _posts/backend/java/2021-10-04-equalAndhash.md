@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Java 지금이야 말로 equan and HashCode를 재정의 할 때"
+title: "Java 지금이야 말로 Equals and HashCode를 재정의 할 때"
 subtitle: ""
 date: 2021-10-04 11:30:00 +0900
 categories: backend

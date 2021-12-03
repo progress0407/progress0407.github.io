@@ -16,7 +16,62 @@ java8 이상의 내용에 대해 보자
 
 사실.. 보기만 해도 이해가 되기 때문에 굳이 설명을 첨언하지는 않았다 !!
 
-## JAVA8 default와 static의 등장
+## JAVA8의 기능을 지원하지 않던 시절
+
+아래와 같이
+
+```java
+public interface JoinMember {
+	void preJoin();
+
+	void afterJoin();
+}
+```
+
+해당 인터페이스에 위 두 추상 메서드가 있다고 할때
+
+인터페이스를 상속받는 클래스는 두 행위를 모두 구현해야만 한다
+
+그런데 하나만 구현하고 싶을때도 있잖아..?
+
+그럴떄는 이렇게 작성한다
+
+```java
+public class JoinMid implements JoinMember {
+	@Override
+	public void preJoin() {
+		// System.out.println("들어 올떄는 마음대로지만");
+	}
+
+	@Override
+	public void afterJoin() {
+		// System.out.println("나갈때는 .. 무슨 말하려는 지 알지? ㅎ");
+	}
+}
+```
+
+중간에 해당하는 클래스 정의후에
+
+해당 클래스의 구현하고 싶은 행위만 선택한다
+
+```java
+public class HelloJoinMember extends JoinMid {
+
+	@Override
+	public void preJoin() {
+		System.out.println("들어 올떄는 마음대로지만");
+	}
+}
+```
+
+> 선택
+
+```java
+HelloJoinMember helloJoinMember = new HelloJoinMember();
+helloJoinMember.preJoin();
+```
+
+## JAVA8 (메서드) default와 static의 등장
 
 java8부터 default 메서드와 static 메서드를 등장시켰다
 
@@ -83,7 +138,7 @@ Java8Impl.staticMethod();
 
 `List`의 `forEach` 메서드도 8버전 이후 `default`가 등장하면서 생겼다
 
-## java9 private과 private static의 등장
+## JAVA9 (메서드) private과 private static의 등장
 
 ```java
 public interface Java9Interface {
@@ -245,3 +300,17 @@ private static void test3() {
 	System.out.println("evenSum = " + evenSum);
 }
 ```
+
+### 추상클래스는 그럼 필요 없는고야?
+
+위 질문은 인터페이스가 추상클래스의 모든 기능을 대체할 수 있는가로 바뀐다
+
+그렇지는 않다
+
+```java
+private String name = "foo";
+```
+
+메서드가 아닌 위와 같은 private 필드는 지원해주지 않는다 !
+
+위와 같은 경우에는 추상 클래스를 사용하면 해결할 수 있다
