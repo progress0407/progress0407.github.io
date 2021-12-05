@@ -2,7 +2,7 @@
 layout: post
 title: "우테코 프리코스 2차 - 레이싱 게임"
 subtitle: "..."
-date: 2021-11-26 22:30:00 +0900
+date: 2021-12-06 02:30:00 +0900
 categories: backend
 tags: wooteco
 comments: true
