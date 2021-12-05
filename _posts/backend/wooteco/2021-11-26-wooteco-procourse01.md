@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "우테코 프리코스 1차"
+title: "우테코 프리코스 1차 - 숫자 야구 게임"
 subtitle: "..."
 date: 2021-11-26 22:30:00 +0900
 categories: backend
