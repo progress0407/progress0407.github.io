@@ -87,6 +87,72 @@ SublimeText에선
 
 이번 과제에서도 `TreeSet`을 많이 이용하였습니다.
 
+### 우테코 Custom Assertion 예러
+
+아래와 같은 코드에서 우테코의 테스트코드를 통과하지 못하였다
+
+```java
+		while (true) {
+			try {
+				System.out.println(INPUT_MACHINE_MONEY_MESSAGE);
+				String input = Console.readLine().trim();
+				CoinInputValidator.validateMachineMoneyInput(input);
+				// System.out.println();
+				return Integer.parseInt(input);
+			} catch (Exception exception) {
+				System.out.println(exception.getMessage());
+				continue;
+			}
+		}
+
+```
+
+아래와 같은 콘솔로그가 찍히면서 안 된다 ㅠ
+
+![image](https://user-images.githubusercontent.com/66164361/145818774-e5ba5db3-a0a1-4c38-b795-c93f0ce90c31.png)
+
+위의 `try` 문장이 포인트다 여기서 `input`변수를 해당 스코프 범위 밖으로 꺼내면 문제가 해결된다
+
+### 사실은 CoinRepository는 필요 없다..?
+
+Coin은 다른 자료구조와 달리 `enum`이다 !!
+
+때문에 static하게 전역적으로 저장되며 어디서든 불러올 수 있다
+
+때문에 굳이 일급컬렉션과 비슷한 용도로 사용하는 `CoinRepository`로 만들어서 관리 하지 않고
+
+`Coin` 자체에서 관리를 하는 로직으로 변경하였다
+
+다른 `Repository`는 해당 도메인 객체의 컬렉션을 지니고 있어서 `CRUD`등의 기능을 제공하는 게 맞다고 본다 !!
+
+### 에러 메세지를 따로 상수로 관리할 떄는 enum보다는 class로 !
+
+개인적으로 `enum`으로 관리할 때는
+
+```
+ERROR_PREFIX = "[ERROR] ";
+INPUT_PREFIX = "입력값이 ";
+ERROR_NOT_NUMBER = ERROR_PREFIX + INPUT_PREFIX + "숫자이어야 합니다.";
+```
+
+위와 같은 것을 할 수가 없다 (_내가 아는한_)
+
+그래서 class로 만들어서 `public static final` 로 관리해주면 수월하다
+
+### 사실은 음료만 있을 수 있는게 아니 잖아...?
+
+어느샌가 존댓말에서 편한말로 옮겨졌다...
+
+사실은 비단 음료수 뿐만 아니라 그 이외의 칙촉 등의 과자류, 콘돔(...) 작은 물건들이 올 수 있을 수 있는데
+
+음료수(`Beverage`)로 제한을 둔 것 같다
+
+`Product`는 운영환경을 떠올리는 딱딱한 단어인 것 같아서
+
+조금 더 게임 인벤터리처럼 편하게 감기는 `Item`이란 용어를 차용했다
+
+실제로 영한님 강의에서도 상품을 `Item`으로 사용하였다 !
+
 ## 약한점 보강해야할 점 (시험을 위한 목적)
 
 - 자바 API 정규식 작성 능력
@@ -100,7 +166,7 @@ SublimeText에선
 
 ## 개선해나갈 점 (장기적인 부분)
 
-중복되는 코드의 제거
+### 중복되는 코드의 제거
 
 ```java
 		while (true) {
@@ -121,3 +187,15 @@ SublimeText에선
 위 코드를 제거할 수 있으면 좋을 것 같다  
 람다 식을 생각하고 있는데 input과 output이 다양하게 나올 수 있기 때문에  
 그것을 고려한 함수식을 어떻게 설계할지가 관건일 것 같다
+
+### 깃 사용 방법 익히기
+
+깃을 잘 다루지 못하여
+
+커밋 메세지 하나를 수정하려다가 아래와 같은 불필요한 메세지를 남기게 되었다 ㅠㅠ
+
+![image](https://user-images.githubusercontent.com/66164361/145912249-2b29946a-28cc-43f5-9319-a4ac37fb12b3.png)
+
+원격에 이미 올린 커밋 메세지를 돌리지 못하여 생긴 문제인데
+
+git에 대해 다시 공부해볼 필요가 있다
