@@ -47,12 +47,24 @@ comments: true
 
 ### 초기 세팅
 
-java8 로 설정
-그래들
+- java8인지 확인
 
-- build.gradle UTF-8로 한건지 확인
-- git bash 테스트 코드 build now확인
-  docs확인 readme
+  - 터미널에 `java -version`
+
+- build.gradle UTF-8로 변경
+
+> build(build.gradle): UTF-8 인코딩 네이버 핵데이 컨벤션 적용
+
+```
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+```
+
+- git bash로 테스트 코드가 빌드 되는지 확인
+
+  - 터미널은 한글이 깨지는데 아직까지 이걸 고치지 못했다 ㅠㅠ
+
+- docs(`README`): 요구사항 작성
 
 ### 현실적인 코딩 순서
 
