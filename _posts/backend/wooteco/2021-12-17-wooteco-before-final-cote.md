@@ -91,3 +91,19 @@ compileTestJava.options.encoding = 'UTF-8'
 
 - Map: LinkedHashMap
 - List: LinkedList
+
+구현은 InputView 중심으로 하도록 하자
+
+이렇게 해야 무엇을 구현해야할 지 상기가 잘 된다 !
+
+### `Subway`를 다시 풀어 보니...
+
+순수 기능 구현만 해보니 약 3시간 40분 정도가 걸렸다
+
+`InputView`에서 다른 구현 화면으로 넘기는 것이 쉽지 않았다
+
+그리도 넘어간 화면에서 현재 화면으로 `DTO`를 넘겨줘야 하는 부분을 떠올리는 것도 오래 걸렸다
+
+map에 넣은 값을 지연평가하는 것도 넣어줘야 한다
+
+그렇지 않으면 `if` 문으로 둘러 쌓인 코드들로 범벅이 될 것이다
