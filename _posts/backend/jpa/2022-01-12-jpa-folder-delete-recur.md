@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[BFS] 하위 폴더 최소의 쿼리로 지우기"
+title: "[JPA-트리편 1] 하위 폴더 최소의 쿼리로 지우기"
 subtitle: "..."
 date: 2022-01-12 23:00 +0900
 categories: backend
