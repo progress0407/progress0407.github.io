@@ -152,6 +152,208 @@ implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
 
 ![image](https://user-images.githubusercontent.com/66164361/151696986-938bfdb8-2484-4083-897f-e4b31676ddba.png)
 
+### 일대일 관계에서 FK 는 누구에게?
+
+---
+
+영한쌤 같은 경우 접근을 많이 하는 테이블을 기준으로 FK 를 둔다고 하셨다
+
+예를 들어 `delivery` 보다는 `order` 에 접근을 많이 하기 때문에 order에 `FK` 를 넣는다
+
+- order를 보면서 delivery에 접근을 많이 하며, 그 반대의 경우는 별로 없다고 가정한다
+
+### 다시 한 번 정리해보는 `EAGER`
+
+---
+
+`EAGER` 는 `조인` 뿐만 아니라 연관된 도메인 가져오려는 모든 행위이다
+
+예를들어 일대다 관계인 member, order에서 order.Member가 `EAGER` 로 fetch type이 잡혀있다고 가정을 하자
+
+`JPQL`로 `select o from Order o` 라는 쿼리문을 실행하였다면
+
+`FK`로 잡혀있는 모든 member를 가져온다 (조인이 아니라 `1+N`) 이것 또한 `EAGER` 이다 !
+
+### 이제서야 알게 된 @Entity(`name`) 과 @Table(`name`) 차이
+
+---
+
+항상 생각을 했었다, 어째서 영한님은 `@Entity(name = ... )` 을 사용하지 않고
+
+굳이 `@Table`의 `name`속성을 따로 사용하는 것일까?
+
+오늘 그 이유를 알았다,
+
+> given
+
+```java
+@Entity
+@Table(name = "orders")
+public class Order { ... }
+```
+
+> when
+
+```java
+em.createQuery("select o from orders as o", Order.class).getResultList();
+```
+
+> then
+
+![image](https://user-images.githubusercontent.com/66164361/151705144-33fee1ca-f89d-40f1-8abe-6f4d34417255.png)
+
+위와 같은 에러 코드가 나게 되는데, 이유는 `@Table(name = "orders")` 에 설정된 것이 Entity 명이 아니라 정말 table 명만을 저렇게 지칭한 것이기 때문이다, `Order`란 엔티티 명을 그대로 사용할 수 있게 된다!
+
+만일 `@Entity(name = "orders")` 로 설정한다면 `JPQL`은 `Order` 란 순수 자바 엔티티명을 사용하지 못하고 `orders` 라는 테이블 종속정인 명칭을 사용해야 한다 ! _(ㅠㅠ)_
+
+### LAZY를 사용 안하고 EAGER로 사용하는 실무자들... (강의 내용 중)
+
+---
+
+아직 겪어보진 못했지만 실무자분들이 LAZY가 아닌 EAGER로 잡는 경우가 있는 것 같다
+
+이유는 lazy로딩시 잡으면 트랜잭션 밖에서 예외가 발생하는 몇몇 경우가 있는 것 같은데..
+
+이에 대한 대안책은 transaction을 빨리 가져오거나 OSIV를 이용하거나 궁극적으로는 `fetch join` 을 이용하면 된다고 한다
+
+### 컬렉션에 set을 함부로 하지 말 것
+
+---
+
+영속화 이후 `PersistenceBag` 이라는 하이버네이트가 관리하는 래퍼 클래스가 들어온다
+
+여기서 무언가 다른 객체로 갈아끼우면 하이버네이트가 의도하는 동작대로 되지 않을 수 있다
+
+### 테이블, 컬럼명 생성 전략 `NamingStrategy`
+
+---
+
+부트 기본 전략
+
+- 카멜케이스 → (스몰케이스)언더스코어
+  - 예) orderDate → order_date
+
+> 이 부분은 강의내용 pdf를 보고 좀더공부를 해보면 될 것 같다
+
+### 양벙향 연관관계 편의 메서드
+
+---
+
+관계에서 좀 더 컨트롤하는 쪽에 걸어둔다고 하셨다 (.. 조금 모호하게 와닿아서 나는 일대다의 일에 걸어두고 있다)
+
+### 애플리케이션 아키텍쳐 설명 도중
+
+---
+
+현재 예제에서는 Controller에서 Repository로 바로 접근하는 것도 허용한다고 하셨다
+
+단순히 Service객체가 Repository를 불러오는 정도의 책임만 가지고 있으면 유연성이 떨어진다고 생각하였다 (실용적인 관점에서 좋지 않음)
+
+실제로 본인도 MVC 구조에 대해 생각할때.. 굳이 이런것까지 service를 타야해? 라는 것도 있었던 것을 생각해보면 수긍이 간다 !
+
+### EntityMangerFactory 를 주입받고 싶으면
+
+---
+
+`@PersistenceUnit` 를 추가하면 된다 !
+
+- 스프링 데이터 JPA는 `@Autowired` 로 주입이 가능하다 !
+
+따라서 생성자 주입 방식으로 사용 가능 !
+
+```java
+@PersistenceUnit
+private EntityManagerFactory emf;
+```
+
+### 애플리케이션 개발 순서
+
+---
+
+핵심 domain 계층 → 웹계층
+
+도메인 → 리포지토리 → 서비스 → 테스트코드 작성 및 검증 → 컨트롤러, 웹
+
+### @Transactional(readOnly = true)
+
+---
+
+기본적으로는 쓰기 가능모드이지만 대게 읽기 전용 메서드가 많으므로 service에는 읽기전용으로 건 후에
+
+세부 변경 가능의 메서드에 기본 어노테이션을 걸어두면 된다 !
+
+### validator 검증 로직 (회원 이름 중복 검증)
+
+---
+
+검증 로직을 넣어도 멀티 쓰레드 환경에서는 중복 검증 로직을 뚫고 가입이 이루어질 수 있다
+
+때문에 최후의 방어로 DB에 유일키 제약 조건을 걸어두어야 한다
+
+### 테스트코드: 회원가입에서 insert 쿼리가 안 나가는 이유
+
+---
+
+`@SpringBootTest` + `@Transactional` 시 기본적으로 `롤백`이 기본 전략이기 떄문이다
+
+롤백시에 캐시에 있는 데이터를 flush하지 않고 말끔하게 지운다
+
+보고 싶다면 !
+
+1. `@Rollback(false)` 로 하거나
+
+2. 엔티티매니저를 주입받아서 수동 flush 해주면 된다
+
+### 테스트 코드 작성시 예외에 대한 로직
+
+---
+
+```java
+@Test
+public void 중복_회원_예외() {
+
+  //... 예외 로직
+
+  try {
+    memberService.join(userB);
+  } catch (MemberDuplicateException e) {
+    return;
+  }
+
+  // then
+  fail("예외가 발생하여 이 코드에 도달하지 못해야 한다");
+}
+```
+
+더 간단하게 작성하는 법은 아래와 같다
+
+```java
+@Test(expected = MemberDuplicateException.class)
+public void 중복_회원_예외_V2() {
+
+  //... 예외 로직
+  memberService.join(userB);
+
+  // then
+  fail("예외가 발생하여 이 코드에 도달하지 못해야 한다");
+}
+```
+
+### 테스트 환경시 별도의 설정을 적용하고 싶어!
+
+---
+
+`src` 폴더 밑에 main / test로 나뉘는데 실환경은 main의 설정, 테스트 환경은 test가 우선권을 가진다 !
+
+> h2 인메모리 설정  
+> https://www.h2database.com/html/cheatSheet.html
+
+h2 db는 자바로 만들어졌기 때문에 부트 실행시 JVM위에 돌아갈 수 있도록 부트가 지원해준다 !
+
+url 설정 : `jdbc:h2:mem:test`
+
+그리고 부트는 굳이 설정하지 않고 yml 파일만 있으면 h2 인메모리로 동작한다 !!
+
 ## 그외
 
 ---
