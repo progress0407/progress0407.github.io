@@ -302,6 +302,8 @@ private EntityManagerFactory emf;
 
 1. `@Rollback(false)` 로 하거나
 
+   - `@Commit` 으로도 가능하다 !
+
 2. 엔티티매니저를 주입받아서 수동 flush 해주면 된다
 
 ### 테스트 코드 작성시 예외에 대한 로직
