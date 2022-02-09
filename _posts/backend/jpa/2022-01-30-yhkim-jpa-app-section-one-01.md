@@ -16,6 +16,18 @@ comments: true
   - devtools 의존성 + settings에서 `Build project automatically` 설정을 체크해주어야 한다 (금방 찾는다 ! 구글링 할 것 !)
   - html, java 파일을 서버 재기동 없이 반영하여 빠르게 개발 가능
 
+1. 추가
+
+```
+implementation 'org.springframework.boot:spring-boot-devtools'
+```
+
+2. 체크
+
+- Build, Execution, Deployment
+  - Compiler
+    - `Build project automatically`
+
 ## 설정 포인트들 !
 
 ---
