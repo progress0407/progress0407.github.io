@@ -368,6 +368,28 @@ url 설정 : `jdbc:h2:mem:test`
 
 그리고 부트는 굳이 설정하지 않고 yml 파일만 있으면 h2 인메모리로 동작한다 !!
 
+### DDD에 대한 짧은 언급
+
+---
+
+보통 `Item` 객체에 재고를 증가한다면 서비스에서 getter를 통해 호출후 setter로 +1 된 값을 대입한다
+
+DDD에서는 그러지 않고 `Item`에 책임을 위임한다
+
+### 인텔리J 기능 : for -> lambda
+
+---
+
+충격과 공포...
+
+![image](https://user-images.githubusercontent.com/66164361/153636441-c890d6ae-f494-4657-9c2b-a7dde381c995.png)
+
+위와 같이 `alt + enter`를 누른 후 하이라이트된 부분을 선택하면
+
+![image](https://user-images.githubusercontent.com/66164361/153636494-2a11e9aa-f5f9-49ea-b594-64e293520d04.png)
+
+이처럼 람다 & 스트림으로 치환된다 !!
+
 ## 그외
 
 ---
