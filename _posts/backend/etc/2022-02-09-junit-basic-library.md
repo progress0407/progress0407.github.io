@@ -177,3 +177,23 @@ void toLowerCase_ShouldGenerateTheExpectedLowercaseValue(String input, String ex
 
 > 바다의 JUnit5 사용법 https://youtu.be/EwI3E9Natcw
 > ParameterizedTest 사용법 https://gmlwjd9405.github.io/2019/11/27/junit5-guide-parameterized-test.html
+
+### assertThat(..).isEqualTo(..) 가 비교하는 것은 동등성일까 동일성일까?
+
+---
+
+위 사항이 궁금하여 아래의 코드로 테스트를 돌려보았다
+
+결과는 동등성을 비교하였다
+
+![image](https://user-images.githubusercontent.com/66164361/153705856-f825ae43-a43d-4531-a7c8-9b08d3b45e4f.png)
+
+또한 객체를 따로 생성하여서 아래와 같이 동등성을 비교해보았다
+
+![image](https://user-images.githubusercontent.com/66164361/153706073-0548b8c4-0ecf-43e9-aa2a-000e69366d1f.png)
+
+`euals`를 오버라이드 하기 전에는 fail이었지만 한 후에는 pass가 되었다
+
+만일 동일성을 비교하는 것이었으면 오버라이드 유무에 관계 없이 모두 fail이었을 것이다
+
+따라서 동등성이 기준이었음을 확인하였다
