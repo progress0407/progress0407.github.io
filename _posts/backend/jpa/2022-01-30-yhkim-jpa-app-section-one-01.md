@@ -390,101 +390,61 @@ DDD에서는 그러지 않고 `Item`에 책임을 위임한다
 
 이처럼 람다 & 스트림으로 치환된다 !!
 
-### 스터디에서 나온 내용들
+### 다시 살펴보는 cascade
 
 ---
 
-1. 상황에 따라 달라지는 객체의 동등성
+order와 {delivery, orderItem} 정도의 관계에서만 사용해야 한다!
 
-아래의 경우는 당연히 같다
+예를들어 delivery는 다른 객체를 부모로 두지 않는다.. 딱 이정도의 관계에서 사용해야 한다!
 
-```java
-@Transactional
-@Test
-public void 저장한_객체와_꺼낸_객체는_당연히_같다() {
+나) 즉 order가 aggregate의 최상단이며 나머지가 그 자식들일때 !
 
-	// when
-	Long savedId = memberService.join(member);
-	Member findMember = memberService.findOne(savedId);
+    -	private owner ..? 강의상에서 언급한 개념인데 ㅠ 잘 못들었다
 
-	// then
-	assertThat(findMember).isEqualTo(member);
-}
-```
+또 생성, 삭제등과 같은 행위에서 라이프 사이클을 동일한 타이밍에 관리할 때
 
-그러나 다음의 경우는 다르다
+정리하면 아래와 같은 조건을 만족할 떄 `cascade` 옵션을 사용한다
 
-```java
-@Test
-public void 영속성_컨텍스트가_다를경우_객체는_서로_같지않다() {
+1. 주인이 오직 하나 일 떄
 
-	// when
-	// 영속성 컨텍스트_시작 --->
-	Long savedId = memberService.join(member);
-	// <--- 영속성 컨텍스트 종료
+2. 생애주기를 동일하게 관리할 때
 
-	// 영속성 컨텍스트_시작 --->
-	Member findMember = 회원_찾기(savedId);
-	// <--- 영속성 컨텍스트 종료
+위 사항이 아닐 때는 쓰지 아니한다
 
-	// then
-	assertThat(findMember == member).isFalse();
-	assertThat(findMember).isNotEqualTo(member);
-}
+예를 들어 delivery가 중요해서 다른 곳에서 참조해서 사용할 때는 사용하면 아니된다
 
-@Transactional
-public Member 회원_찾기(Long id) {
-	return memberService.findOne(id);
-}
-```
+### 정정 팩토리 메서드 : OrderItem.createOrderItem
 
-우선 회원\_찾기 메서드는 별도로 트랜잭션이 걸려있어서 새로운 트랜잭션이 열린다.
-또한 memberService또한 메서드에 트랜잭션이 걸려있어서 별도의 트랜잭션을 가진다
+---
 
-따라서 두 객체는 서로 다른 객체이다
+위와 같이 정적 생성하는 메서드가 별도로 있을 때는 이외의 모든 스타일의 생성자는 막는게 좋다
 
-```java
-@Transactional
-@Test
-public void 영속성_컨텍스트가_다를경우_객체는_서로_같지_않지만_동일한_트랜잭션_범위라면_서로같다() {
+- 예측하지 못한 방식의 생성이 있을 수 있기 떄문 !
 
-	// when
-	Long savedId = memberService.join(member);
-	Member findMember = 회원_찾기(savedId);
+따라서 jpa는 `protected` 까지 허용하므로 기본생성자의 접근 제어자를 `protected`로 변경하자 ! ㅎ
 
-	// then
-	assertThat(findMember == member).isTrue();
-	assertThat(findMember).isEqualTo(member);
-}
-```
+jpa사용중 `protected`는 쓰지 말란 뜻이다 !
 
-방금 위에서 시행했었던 테스트 메서드 위에 `@Transactional`을 붙이면 pass가 된다
+### 도메인 모델 패턴과 트랜잭션 스크립트 패턴
 
-이유는 스프링의 기본 `@Tranasactional` 하위 트랜잭션이 상위에 참여를 하기 때문에 각각의 트랜잭션은 의미가 없어진다
+---
 
-반대로
+- 도메인 모델 패턴
 
-```java
-@Transactional(propagation = Propagation.REQUIRES_NEW)
-```
+  - 엔티티가 비즈니스 로직을 가지고 객체 지향의 특성을 적극 활용하는 것
+    - 서비스 계층은 단순히 엔티티에 필요한 요청을 위임하는 역할을 한다
+  - http://martinfowler.com/eaaCatalog/domainModel.html
 
-자식 트랜잭션들에 위와 같이 설정을 하게 되면 자식들마다 새로운 트랜잭션을 열게 되므로 테스트는 fail이 일어나게 된다
+- 트랜잭션 스크립트 패턴
+  - 엔티티에는 비즈니스 로직이 거의 없고 서비스 계층에서 대부분의 비즈니스 로직을 처리하는 것
+  - http://martinfowler.com/eaaCatalog/transactionScript.html
 
-```java
-@Transactional
-@Test
-public void _1차_캐시를_지우면_두_객체의_동일성은_서로_다르다() {
-	em.persist(member);
-	Long savedId = member.getId();
-	em.flush();
-	em.clear();
+#### SpringBootTest 보다는 단위테스트를...
 
-	Member findMember = em.find(Member.class, savedId);
-	assertThat(findMember != member).isTrue();
-}
-```
+---
 
-메서드 명에서처럼 1차 캐시를 지워진 이후에 찾아오면 두 객체는 서로 다르다 !
+빠르게 통과시킬 수 있는 단위테스트가 더 중요하다고 말씀하였다
 
 ## 그외
 
