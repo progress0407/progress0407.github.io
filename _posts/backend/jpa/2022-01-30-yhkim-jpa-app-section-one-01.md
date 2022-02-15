@@ -442,9 +442,61 @@ jpa사용중 `protected`는 쓰지 말란 뜻이다 !
 
 #### SpringBootTest 보다는 단위테스트를...
 
+빠르게 통과시킬 수 있는 단위테스트가 더 중요하다고 말씀하였다
+
+### 다시 한번 살펴보는 BindingResult
+
 ---
 
-빠르게 통과시킬 수 있는 단위테스트가 더 중요하다고 말씀하였다
+![image](https://user-images.githubusercontent.com/66164361/153770854-f6cc7506-c1f3-438f-9042-f850868fabb3.png)
+
+위와 같은 검증 어노테이션을 통해서 아래와 같이 검증 메세지를 화면단에서 받을 수 있다
+
+![image](https://user-images.githubusercontent.com/66164361/153770832-09890bd0-2d80-4b47-98ad-798f09b28b6d.png)
+
+스프링이 BindingResult 란 객체를 통해서 처리를 해주며 아래와 같이 에러필드의 메세지에 있다는 것을 확인할 수 있음!
+
+- 프론트 친구들에게 에러메세지를 ajax로 객체를 전송해줄 수 있다 !
+
+![image](https://user-images.githubusercontent.com/66164361/153770792-735cd318-c153-49dc-93a2-62e3a825016f.png)
+
+### 폼 객체를 그냥 쓸지, 아니면 순수한 엔티티 통으로 쓸지
+
+---
+
+요구사항이 정말 단순하다면 엔티티를 써도 되겠지만 보통은 그리 단순하지 않다
+
+폼객체를 통해서 사용하는 것이 좋다
+
+왜냐하면 `@NotEmpty` 같은 검증이 붙으면 엔티티가 점점 지저분해진다
+
+그래서 별도로 화면에 맞는 객체를 사용하기 위해 폼 객체나 DTO를 사용해야 한다 !
+
+### API를 만들 때는 절대 엔티티를 반환하면 안됀다 !
+
+---
+
+API는 하나의 스펙이다
+
+그런데 예를 들어 Member 엔티티에 필드가 하나 추가되었다면 기존의 API 스펙과 맞지 않게 된다
+
+- 불안 전한 API 스펙
+
+그리고 추가된 필드가 주민번호나 비밀번호 등이라면 외부로 노출되는 셈이다
+
+### Setter를 사용한 코드는 지양하자
+
+---
+
+아래는 안 좋은 코드이다
+
+![image](https://user-images.githubusercontent.com/66164361/153771915-d952a656-71c5-4e5c-9f3a-e05a36dc6713.png)
+
+setter를 지우고 createBook과 같은 static 메서드를 활용해서 만드는 것이 좋다
+
+![image](https://user-images.githubusercontent.com/66164361/153772100-91f16362-d350-454f-9bdb-79b43e2c2f3f.png)
+
+위에 처럼 !
 
 ## 그외
 

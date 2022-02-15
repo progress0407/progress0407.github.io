@@ -22,7 +22,7 @@ comments: true
 
 먼저 페어의 원격 저장소를 추가한다
 
-```git
+```
 git remote add [페어의 베이스 브랜치] [페어의 원격 저장소 URL]
 ```
 
@@ -35,3 +35,13 @@ git pull [페어의 베이스 브랜치]
 ```
 
 > 예) `git pull woong7`
+
+### 다른 크루님의 브랜치 염탐하는 git 커맨드 !
+
+---
+
+```
+git clone -b {브랜치명} {git 저장소 URL}
+```
+
+> 예) `git clone -b step1 https://github.com/progress0407/java-racingcar.git`
