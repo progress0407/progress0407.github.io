@@ -506,6 +506,78 @@ setter를 지우고 createBook과 같은 static 메서드를 활용해서 만드
 
 그렇지 않으면 크래커에 의해 다른 사용자의 item이 수정될 수 있다
 
+### `merge` 가 무엇이지?
+
+---
+
+아래 코드 처럼 등록하는게 merge이다
+
+```java
+@Transactional
+public Item updateItem(Long itemId, Book param) {
+  Item findItem = itemRepository.findOne(itemId);
+
+  findItem.setPrice(param.getPrice());
+  findItem.setName(param.getName());
+  findItem.setStockQuantity(param.getStockQuantity());
+
+  return findItem;
+}
+```
+
+- 먼저 가져올 엔티티를 조회한 후
+- 변경되는 값들을 찾아서 모두 변경한다
+  - 이때 모든 엔티티 필드에 대해 변경함
+- 그 다음에 영속성 컨텍스트에 저장한 엔티티를 새로 반환한다
+
+```java
+Item mergedItem = em.merge(item)
+```
+
+이때 item은 준영속, mergedItem 은 영속상태이다
+
+### `merge` 는 함부로 쓰면 안돼
+
+---
+
+변경감지와 다르게 엔티티를 통째로 갈아끼우기 때문에 조심해야 한다!
+
+만일 화면에서 price를 넘겨주지 않으면 엔티티에 price가 null이 들어올 위험이 있는데
+
+이때 `merge`를 호출하면 기존의 price 값이 null로 덮어 씌워진다
+
+> 결론! `merge` 보다는 `더티체킹` + `persist` 를 사용해라 !
+
+### 더티 체킹할 때 set 보다는 ...
+
+---
+
+`setPrice` 등의 메서드 보다
+
+`changeItem(Item)` 등의 메서드를 제공하자
+
+만일 필자라면 item 객체를 통쨰로 넘겨 해당 메서드 구현부에서 값을 넣는 쪽으로, 관리 포인트를 하나로 만들 것이다 !
+
+아래 처럼
+
+```java
+public void changeItem(Item param) {
+  price = param.price;
+  name = param.name;
+  stockQuantity = param.stockQuantity;
+}
+```
+
+### Controller에서 member, item 등을 찾는다면 ?
+
+---
+
+위 말은 controller에서 memberRepository 등을 다이렉트로 접근한다는 의미와 동일하다
+
+위 상황에서 member 객체를 가져오면 `@Transactional` 에 의한 영속성 관리가 안 되기 때문에
+
+service로 넘어온 이 객체는 더티 체킹 등이 되지 않는다 !
+
 ## 그외
 
 ---

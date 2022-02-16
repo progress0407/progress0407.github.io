@@ -25,6 +25,10 @@ comments: true
 
 ![image](https://user-images.githubusercontent.com/66164361/154189910-3515352a-2c74-406f-bc2f-ee7053dfc617.png)
 
+그리고 아래 블로그에 설명이 아주 잘되어있다
+
+> http://blog.cowkite.com/blog/2003062358/
+
 ## 작성한 리뷰 내용
 
 ---
