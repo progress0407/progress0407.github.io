@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "우테코 git 특강 하면서 작성한 회고"
+title: "우테코 git 특강 회고"
 subtitle: "..."
 date: 2022-02-16 12:00:00 +0900
 categories: backend
