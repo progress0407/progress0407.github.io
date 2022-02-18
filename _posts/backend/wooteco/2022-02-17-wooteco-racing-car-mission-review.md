@@ -426,3 +426,37 @@ private boolean isDuplicated(final List<Car> cars) {
 위 `1.` 과 `2.` 모두 멀티 쓰레드에서 성능이 좋은 API이다.
 
 따라서 변경하였고 `Scanner` 는 `InputView` 에서 사용하고 있던 `API` 인데 유틸리티 클래스에서 `new`로 인스턴스화 가능한 클래스로 변경하였다
+
+### System.**setIn** 을 통한 Scanner의 입력값 교체하기
+
+---
+
+이건 다른 분의 블로그를 통해서 알게 되었다..
+
+신기하군 !
+
+> https://sakjung.tistory.com/33 > https://steadyjay.tistory.com/10
+
+그러나 `Scanner` 는 `string`도 input으로 받을 수 있는 것 같다.. 이걸 어떻게 잘 활용하면 다른 방법으로도 풀어낼 수 있지 않을까??
+
+### toString 의 바람직한 용도
+
+---
+
+로깅/디버깅 용도로 사용되지 운영 코드로는 사용되지 않는 다는 것..
+
+InputView로 도메인이나 DTO를 넘겨서 이곳에서 view를 위한 정보를 만들어 내는 것이 좀 더 용례 맞을 지도 모른다고 생각이 들기도 한다..
+
+> 참고: https://hudi.blog/java-correct-purpose-of-tostring/
+
+그러나 이부분도 의견이 엇갈린다.. 아래는 스택오버플로 답변
+
+![image](https://user-images.githubusercontent.com/66164361/154497968-b2e1f858-320e-4f1a-84f7-f16cc4f178fc.png)
+
+> 출처: https://stackoverflow.com/questions/563676/is-tostring-only-useful-for-debugging
+
+흠, 일단은 안쓰는 쪽으로 가보려고 한다.
+
+뷰는 콘솔에서 스윙이나 HTML등으로 바뀔 수 있으니..
+
+toString은 좀 더 온전한 의미를 담기로 하고, 시각적 요소를 없애는 방향으로 가자
