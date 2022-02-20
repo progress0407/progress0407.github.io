@@ -542,9 +542,9 @@ Item mergedItem = em.merge(item)
 
 변경감지와 다르게 엔티티를 통째로 갈아끼우기 때문에 조심해야 한다!
 
-만일 화면에서 price를 넘겨주지 않으면 엔티티에 price가 null이 들어올 위험이 있는데
+만일 화면에서 price를 넘겨주지 않으면 엔티티에 price가 `null`이 들어올 위험이 있는데
 
-이때 `merge`를 호출하면 기존의 price 값이 null로 덮어 씌워진다
+이때 `merge`를 호출하면 기존의 price 값이 **null로 덮어 씌워**진다
 
 > 결론! `merge` 보다는 `더티체킹` + `persist` 를 사용해라 !
 
@@ -556,7 +556,7 @@ Item mergedItem = em.merge(item)
 
 `changeItem(Item)` 등의 메서드를 제공하자
 
-만일 필자라면 item 객체를 통쨰로 넘겨 해당 메서드 구현부에서 값을 넣는 쪽으로, 관리 포인트를 하나로 만들 것이다 !
+만일 필자라면 item 객체를 통째로 `changeItem`을 넘겨서 관리 포인트를 하나로 만들 것이다 !
 
 아래 처럼
 
@@ -567,6 +567,8 @@ public void changeItem(Item param) {
   stockQuantity = param.stockQuantity;
 }
 ```
+
+이렇게 하면 `set` 메서드를 정의해두지 않아도 된다 ㅎ
 
 ### Controller에서 member, item 등을 찾는다면 ?
 

@@ -1,7 +1,7 @@
 ---
 layout: list
-title: books
-slug: books
+title: 책, 강연
+slug: book
 menu: true
 submenu: true
 order: 5
