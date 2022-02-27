@@ -4,7 +4,7 @@ title: "[최범균님 디자인 패턴] 객체지향과 디자인 패턴 : 객�
 subtitle: "..."
 date: 2022-02-27 18:00 +0900
 categories: book
-tags: book-cbk-basic-design-pattern
+tags: cbk-basic-design-pattern
 comments: true
 ---
 
