@@ -6,6 +6,7 @@ date: 2022-02-27 18:00 +0900
 categories: book
 tags: cbk-basic-design-pattern
 comments: true
+published: true
 ---
 
 ## 절차 지향과 객체 지향
