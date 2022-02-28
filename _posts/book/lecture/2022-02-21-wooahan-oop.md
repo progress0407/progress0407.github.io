@@ -2,6 +2,7 @@
 layout: post
 title: 우아한테크세미나 - 우아한 객체지향
 subtitle: "..."
+date: 2022-02-21 18:00 +0900
 categories: book
 tags: lecture
 comments: true
