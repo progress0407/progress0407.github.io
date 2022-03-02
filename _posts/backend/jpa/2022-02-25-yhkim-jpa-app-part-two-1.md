@@ -166,6 +166,8 @@ select new jpabook.jpashop.repository.order.simplequery.OrderSimpleQueryDto(o.id
 
 화면에 의존적인 복잡한 쿼리는 별도의 하위 패키지를 두어 이곳에 몰아 둔다
 
+> 예) repository.order.simplequery
+
 ### vs fetch join 으로 모두 가져오기
 
 ---
