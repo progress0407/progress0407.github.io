@@ -22,7 +22,7 @@ comments: true
 
 ### Enum은 사실 Abstract Class 다
 
-> 자바의 정석
+> 자바의 정석 - 남궁성
 
 ```java
 
