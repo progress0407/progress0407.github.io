@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[김영한 - JPA 실전 활용 2편] 웹 애플리케이션 개발"
+title: "[김영한 - JPA 실전 활용 2편] API 개발과 성능 최적화"
 subtitle: "..."
 date: 2022-03-01 20:00 +0900
 categories: backend
