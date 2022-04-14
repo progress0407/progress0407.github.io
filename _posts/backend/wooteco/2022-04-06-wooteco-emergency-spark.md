@@ -29,13 +29,12 @@ comments: true
 
 ## 참고 레퍼런스
 
-> http://sparkjava.com/documentation#exception-mapping  
+> http://sparkjava.com/documentation#exception-mapping
 
 - Routes
 - Request
 - StaticFiles
 - View And Template
-
 
 ## build.gradle 에 추가할 내용
 
@@ -64,7 +63,6 @@ public static void main(String[] args) {
     get("/hello/:name", (req, res) -> "hello ~! " + req.params(":name"));
 }
 ```
-
 
 ### 쿼리스트링으로 이름을 받아서 전달한다
 
@@ -128,12 +126,11 @@ post("/members", (req, res) -> {
 
 ```html
 {{#user}}
-    <h1>회원 가입 결과</h1>
-    이름 : {{name}}
-    <br />
-    <br />
-    나이 : {{age}}
-{{/user}}
+<h1>회원 가입 결과</h1>
+이름 : {{name}}
+<br />
+<br />
+나이 : {{age}} {{/user}}
 ```
 
 ### 뷰에 도메인 리스트 전송
@@ -154,8 +151,7 @@ post("/members", (req, res) -> {
 
 ```html
 <h1>회원 가입 결과</h1>
-{{#users}}
-이름 : {{name}}
+{{#users}} 이름 : {{name}}
 <br />
 나이 : {{age}}
 <br />
