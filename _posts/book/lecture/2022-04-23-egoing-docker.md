@@ -172,3 +172,11 @@ Docker 의 외부는 Host고 내부는 Container다
 지식 지도 서말 !
 
 > https://seomal.com/map/1/129
+
+---
+
+Docker Compose
+
+`복잡한 컨테이너`를 제어한다 !
+
+`docker-compose up` : `yml` 파일을 이용해서 컨테이너(들)을 실행시킨다
