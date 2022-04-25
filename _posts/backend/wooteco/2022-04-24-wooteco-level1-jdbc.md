@@ -79,10 +79,10 @@ docker/db/mysql/init/*
 > docker ps
 > 사용중인 컨테이너를 조회
 
-> docker exec -it chess_db_1 bash
+> docker exec -it chess_db_1 bash  
 > 셸 기반으로 대화한다
 
-> Error: No such container: chess_db_1
+> Error: No such container: chess_db_1  
 > 이름이 잘못 된 것! 이 이름이 아닐 수 있다
 
 `_`를 `-` 로 바꾸어 보자
@@ -135,3 +135,17 @@ db 커넥션을 물고 있으면 아래와 같이 하나 더 생기는 것을 �
 위 위치에 `SQL` 문을 만들 수 있다 !
 
 ![image](https://user-images.githubusercontent.com/66164361/164982475-ee53cd0c-70c7-4d40-85b8-0075ee601cb8.png)
+
+> show create table member;
+> 테이블 DDL 확인
+
+---
+
+![image](https://user-images.githubusercontent.com/66164361/164982876-9d9e925e-c266-4636-90a4-4d9cf2eb9ac6.png)
+
+---
+
+## 기타
+
+> https://www.slipp.net/questions/276
+> 포비의 jdbc driver 등록 추적

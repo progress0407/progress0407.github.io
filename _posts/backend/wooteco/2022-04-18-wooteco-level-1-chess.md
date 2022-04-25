@@ -131,3 +131,12 @@ comments: true
 ## 체스 미션
 
 ---
+
+> git-repo에 pdf 파일로 정리해놓았습니다~!
+> https://github.com/progress0407/wooteco-general-sheare/blob/main/level-interview/level_1/level_1_interview.pdf
+
+## 참고자료
+
+---
+
+> https://tecoble.techcourse.co.kr/post/2021-04-26-try-with-resource/
