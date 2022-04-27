@@ -73,7 +73,22 @@ $.ajax({
 
 분명 리플렉션 등의 `Util`이 있기 때문에 필요 없었던 것으로 아는데.. 필요하다 !!
 
+### Exception Api 와 Interceptor 호출 순서
+
+ExceptionResolver -> Interceptor.afterCom~ 순으로 실행이 된다.
+즉 앞에서 예외를 잡아버리면 인터셉터에서 Exception Param 은 null 이 된다
+
 안그러면 `null` 값이 들어온다... ㅠ
+
+### Session Store
+
+쓰레드 로컬은 현재 쓰레드에만 해당되는 scope로 bean이 관리된다!!
+즉, request 스코프에 대해서만 해당되므로 이 스코프가 아닌 웹 브라우저를 닫기 전의 Session 스코프가 적용되어 있어야 한다 !
+
+그러나 스프링에서 관리하는 세션 스코프에도 한계가 있었다...
+
+스프링에서 세션을 관리하다보니 이것의 초기화를 찾기 못해서 (즉 해당 세션에 대한 Bean을 강제 초기화해야한다)
+그러나 이것을 하지 못해서 자바에서 강제로 SessionMap을 구현해서 이 방식으로 해당 세션에 대해 재 요청이 있을시 강제로 초기화하는 방법을 선택하였다!
 
 ### 실험
 
@@ -182,3 +197,10 @@ connection 확인 및 안 끊기게 끔 요청을 할 떄 EXIST 쿼리를 사용
 
 > JQuery 옵션들  
 > https://cofs.tistory.com/404
+
+> https://stackoverflow.com/questions/2253453/how-should-i-name-a-java-util-map
+> map 이름 짓기
+> `keyToValue` 처럼 읽는 순서대로 짓는 것이 좋다는 의견
+
+> https://stackoverflow.com/questions/417142/what-is-the-maximum-length-of-a-url-in-different-browsers
+> HTTP URL 길이
