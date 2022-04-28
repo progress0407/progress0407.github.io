@@ -204,3 +204,6 @@ connection 확인 및 안 끊기게 끔 요청을 할 떄 EXIST 쿼리를 사용
 
 > https://stackoverflow.com/questions/417142/what-is-the-maximum-length-of-a-url-in-different-browsers
 > HTTP URL 길이
+
+> https://rastalion.me/mysql-8-0-1-%EB%B2%84%EC%A0%84%EB%B6%80%ED%84%B0-%EC%B1%84%ED%83%9D%EB%90%9C-utf8mb4_0900_ai_ci%EC%9D%98-%ED%95%9C%EA%B8%80-%EC%82%AC%EC%9A%A9%EC%97%90-%EB%8C%80%ED%95%9C-%EB%AC%B8%EC%A0%9C%EC%A0%90/
+> utf8mb4_0900_ai_ci의 한글 사용에 대한 문제점
