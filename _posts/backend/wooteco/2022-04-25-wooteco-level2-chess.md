@@ -90,6 +90,52 @@ ExceptionResolver -> Interceptor.afterCom~ 순으로 실행이 된다.
 스프링에서 세션을 관리하다보니 이것의 초기화를 찾기 못해서 (즉 해당 세션에 대한 Bean을 강제 초기화해야한다)
 그러나 이것을 하지 못해서 자바에서 강제로 SessionMap을 구현해서 이 방식으로 해당 세션에 대해 재 요청이 있을시 강제로 초기화하는 방법을 선택하였다!
 
+```java
+@Repository
+public class SessionToChessRepository {
+
+    private static final int SESSION_REMOVE_MINUTE = 1;
+    private Map<HttpSession, ChessBoard> sessionToChessBoard = new ConcurrentHashMap<>();
+
+    public void add(HttpSession session, ChessBoard chessBoard) {
+        sessionToChessBoard.put(session, chessBoard);
+    }
+
+
+    public ChessBoard get(HttpSession session) {
+        return sessionToChessBoard.get(session);
+    }
+
+    @Scheduled(cron = "*/10 * * * * *")
+    public void checkAndRemoveSessions() {
+        for (HttpSession session : sessionToChessBoard.keySet()) {
+            checkAndRemoveSession(session);
+        }
+    }
+
+    private void checkAndRemoveSession(HttpSession session) {
+        long currentTimeMillis = System.currentTimeMillis();
+        long lastAccessedTime = session.getLastAccessedTime();
+
+        long elapsedMinutes = Duration.ofMillis(currentTimeMillis - lastAccessedTime).toMinutes();
+
+        if (SESSION_REMOVE_MINUTE == elapsedMinutes) {
+            sessionToChessBoard.remove(session);
+            System.out.println("remove it " + session);
+        }
+    }
+}
+```
+
+그러나 위 스케쥴링 기능은 Spring Boot에서 지원하는 글로벌 설정으로 바꾸게 된다.
+
+```yml
+server:
+  servlet:
+    session:
+      timeout: 600
+```
+
 ### 실험
 
 ---
