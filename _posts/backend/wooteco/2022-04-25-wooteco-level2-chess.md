@@ -124,6 +124,10 @@ public class SessionToChessRepository {
             System.out.println("remove it " + session);
         }
     }
+
+    public void delete(HttpSession session) {
+        sessionToChessBoard.remove(session);
+    }
 }
 ```
 
@@ -135,6 +139,27 @@ server:
     session:
       timeout: 600
 ```
+
+### DDL 문을 작성할 수 있음 !
+
+```java
+public class JdbcBoardPieceDao implements BoardPieceDao {
+  public void setForeignKeyChecks(boolean isCheck) {
+      if (isCheck) {
+          jdbcTemplate.update(SET_FOREIGN_KEY_CHECKS_DDL + "1");
+          return;
+      }
+      jdbcTemplate.update(SET_FOREIGN_KEY_CHECKS_DDL + "0");
+  }
+}
+```
+
+### AppleDao -> BananaDao 처럼 참조관계가 있는 테이블을 테스트할 때
+
+![image](https://user-images.githubusercontent.com/66164361/166146770-537405b2-91b8-4bc3-897f-3e96637ece0e.png)
+![image](https://user-images.githubusercontent.com/66164361/166146782-24df7d47-bb84-4b7a-bef3-803d79c40c5e.png)
+
+위와 같이 테스트 가능하다
 
 ### 실험
 
