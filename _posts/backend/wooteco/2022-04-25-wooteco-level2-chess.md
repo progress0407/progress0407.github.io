@@ -242,6 +242,9 @@ connection 확인 및 안 끊기게 끔 요청을 할 떄 EXIST 쿼리를 사용
 
 ## 참고한 것들
 
+> ★ REST-API 설계
+> https://server-engineer.tistory.com/886
+
 > getter를 사용해야 `HttpMessageConverter` 가 변환이 가능한 것으로 보인다  
 > https://thinkground.studio/httpmessagenotwritableexception-no-converter-for-vo-class-with-preset-content-type-null/
 
