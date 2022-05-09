@@ -42,6 +42,16 @@ comments: true
 주소가 없는 것 뿐만 아니라 자원이 존재하지 않으면 `404` 를 반환한다.
 https://velog.io/@jch9537/HTTP-%EC%9D%91%EB%8B%B5%EC%BD%94%EB%93%9C-http-%EC%9D%91%EB%8B%B5%EC%BD%94%EB%93%9C%EC%9D%98-%EC%84%A0%ED%83%9D
 
+## ControllerAdvice는 Controller가 아닌 예외를 잡지 못한다...
+
+```java
+@RestControllerAdvice(annotations = {Service.class, Repository.class})
+```
+
+위와 같은 어노테이션은 Repository에서 발생한 예외를 핸들링해주지 않는다
+
+컨트롤러에서 잡아야 한다 !
+
 # 해결되지 않은 의문
 
 ---
@@ -60,7 +70,22 @@ https://velog.io/@jch9537/HTTP-%EC%9D%91%EB%8B%B5%EC%BD%94%EB%93%9C-http-%EC%9D%
 
 그러나 내가 만든 어노테이션인 @Peanut에서는 그런 것을 찾아볼 수 없었다
 
-##
+## `HttpServletRequest` 객체의 재생성이 되지 않는다
+
+> 이하 `HttpServletRequest` 을 `request` 라고 하겠다
+
+필자가 예측한 이 객체는 사용자가 서버에 요청을 할 때마다 객체가 생성되는 것으로 알고 있었다
+
+그러나 실제 동작은 그렇지 않았다
+
+> 동작 개요
+
+- 사용자가 순차적으로 요청하고, 다시 재 요청한다
+  - 동일한 `request`
+
+마치 쓰레드풀에 담긴 것 마냥.. 재생성되지 않는다 !! 왜그런걸까..
+
+API 툴을 이용해서 디버거를 찍고 테스트해보았지만... 예측한 결
 
 ```java
 @RequestMapping("/users")
@@ -70,7 +95,7 @@ https://velog.io/@jch9537/HTTP-%EC%9D%91%EB%8B%B5%EC%BD%94%EB%93%9C-http-%EC%9D%
 
 실제로 이 어노테이션을 처리하는 RequestMappingHandler
 
-# 참고된 사이트
+# 참고한 사이트
 
 > 모든 클래스 정보 가져오기
 
