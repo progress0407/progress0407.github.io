@@ -10,6 +10,10 @@ comments: true
 
 > 지하철 미션 도중 만들어본 땅콩 박스 만들기를 기록한다 !
 
+## 소스 코드 위치
+
+> https://github.com/progress0407/atdd-subway-map/tree/di_alone > `step1` 브랜치가 아닌 `di_alone` 브랜치에 있어요!
+
 ![image](https://user-images.githubusercontent.com/66164361/167452991-cc526468-1ca2-4e00-93c9-ba87c645aef0.png)
 
 ## 만들게 된 계기
@@ -22,27 +26,31 @@ comments: true
 
 # 구경하기 `^-^`
 
-<img src="" width="30%">
-
 ### 맛 좋은 땅콩 등록하기
 
-<img src="https://user-images.githubusercontent.com/66164361/167449570-b8f6caa9-9960-4d93-aeb9-1896f443c8f2.png" width="30%">
+<img src="https://user-images.githubusercontent.com/66164361/167449570-b8f6caa9-9960-4d93-aeb9-1896f443c8f2.png" width="60%">
 
 ### 땅콩 로켓 배달 받기 !
 
-<img src="https://user-images.githubusercontent.com/66164361/167449890-12d5a449-6260-4844-a443-fb642f93b25f.png" width="30%">
+<img src="https://user-images.githubusercontent.com/66164361/167449890-12d5a449-6260-4844-a443-fb642f93b25f.png" width="60%">
 
 ### 땅콩 어노테이션
 
-<img src="https://user-images.githubusercontent.com/66164361/167449158-337c15e3-85d2-473f-b210-dedcb733abf5.png" width="30%">
+<img src="https://user-images.githubusercontent.com/66164361/167449158-337c15e3-85d2-473f-b210-dedcb733abf5.png" width="60%">
 
 ### 땅콩의 유통 기한
 
-<img src="https://user-images.githubusercontent.com/66164361/167451140-7003db40-d914-4314-b716-d423956dedbe.png" width="60%">
+<img src="https://user-images.githubusercontent.com/66164361/167451140-7003db40-d914-4314-b716-d423956dedbe.png" width="80%">
 
 ### 테스트 코드 작성
 
-<img src="https://user-images.githubusercontent.com/66164361/167451597-8a169770-51cd-4333-8f75-9ae2bad71d4a.png" width="60%">
+<img src="https://user-images.githubusercontent.com/66164361/167451597-8a169770-51cd-4333-8f75-9ae2bad71d4a.png" width="80%">
+
+### 땅콩 박스의 생김새
+
+> 스킵 추천 !
+
+<img src="https://user-images.githubusercontent.com/66164361/167459481-bb330138-893a-4cd1-bf15-16682a773f00.png" width="75%">
 
 # 전체적인 흐름
 
