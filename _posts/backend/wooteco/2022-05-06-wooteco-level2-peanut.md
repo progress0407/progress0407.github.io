@@ -2,7 +2,7 @@
 layout: post
 title: "우테코 레벨2 땅콩 박스 만들기"
 subtitle: "..."
-date: 2022-05-65 00:00:00 +0900
+date: 2022-05-06 00:00:00 +0900
 categories: backend
 tags: wooteco
 comments: true
@@ -43,6 +43,22 @@ comments: true
 ### 테스트 코드 작성
 
 <img src="https://user-images.githubusercontent.com/66164361/167451597-8a169770-51cd-4333-8f75-9ae2bad71d4a.png" width="60%">
+
+# 전체적인 흐름
+
+- Spring IoC가 로딩된다
+
+- 빈이 초기화 된 이후 `ApplicationListener` 구현체의 메서드 `onApplicationEvent` 가 오직 한 번 실행됩니다
+
+  - 이곳에서 `땅콩 박스`를 실행시킵니다
+  - 이 떄 이곳에서 모든 클래스파일을 스캔하여 `@Peanut` 어노테이션이 있는 클래스를 유통기한과 함께 등록합니다
+
+- 땅콩 박스는 자체적으로 싱글톤인데... 생성과정이 다소 복잡하므로 `@Configuration` 을 통해 쉽게 Bean 주입받을 수 있도록 등록합니다.
+
+- 땅콩이 필요한 곳에서는 `@GiveMePeanut` 어노테이션을 작성하면  
+  앞서 동작했던 `ApplicationListener` 구현체의 `onApplicationEvent` 메서드에 의해 땅콩박스가 `run`할 떄 땅콩을 배달해줍니다
+  - 해당 어노테이션 뿐만 아니라 `peanutContext.getPeanut` 을 통해서도 주입이 가능합니다
+  - 땅콩이 존재하지 않으면 `NoSuchPeanutDefinitionException` (땅콩의 정의를 찾을 수 없음 예외)가 발생합니다
 
 # 현재 구현된 기능
 
