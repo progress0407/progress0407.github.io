@@ -58,6 +58,10 @@ https://velog.io/@jch9537/HTTP-%EC%9D%91%EB%8B%B5%EC%BD%94%EB%93%9C-http-%EC%9D%
   - 접근제어자가 `private`이어도 된다 !
   - 리플랙션으로 통과하는 것으로 추측됨
 
+## 슈퍼타입 토큰
+
+> https://sungminhong.github.io/spring/superTypeToken/
+
 # 해결되지 않은 의문
 
 ---
@@ -112,3 +116,12 @@ API 툴을 이용해서 디버거를 찍고 테스트해보았지만... 예측�
 
 > 잭슨 역직렬화 주의점
 > https://findmypiece.tistory.com/m/104
+
+> https://stackoverflow.com/questions/15531767/rest-assured-generic-list-deserialization
+
+> `@RequestBody` 에 기본생성자가 필요한 이유
+> https://velog.io/@conatuseus/RequestBody%EC%97%90-%EA%B8%B0%EB%B3%B8-%EC%83%9D%EC%84%B1%EC%9E%90%EB%8A%94-%EC%99%9C-%ED%95%84%EC%9A%94%ED%95%9C%EA%B0%80  
+> https://velog.io/@conatuseus/RequestBody%EC%97%90-%EC%99%9C-%EA%B8%B0%EB%B3%B8-%EC%83%9D%EC%A0%95%EC%9E%90%EB%8A%94-%ED%95%84%EC%9A%94%ED%95%98%EA%B3%A0-Setter%EB%8A%94-%ED%95%84%EC%9A%94-%EC%97%86%EC%9D%84%EA%B9%8C-2-ejk5siejhh
+
+> 변수 이름  
+> https://chronic794.blogspot.com/2021/02/blog-post_22.html
