@@ -52,6 +52,12 @@ https://velog.io/@jch9537/HTTP-%EC%9D%91%EB%8B%B5%EC%BD%94%EB%93%9C-http-%EC%9D%
 
 컨트롤러에서 잡아야 한다 !
 
+## RestAssured에서 객체 변환
+
+- 기본생성자가 있어야 한다
+  - 접근제어자가 `private`이어도 된다 !
+  - 리플랙션으로 통과하는 것으로 추측됨
+
 # 해결되지 않은 의문
 
 ---
@@ -100,3 +106,9 @@ API 툴을 이용해서 디버거를 찍고 테스트해보았지만... 예측�
 > 모든 클래스 정보 가져오기
 
 - https://stackoverflow.com/questions/40540915/how-to-find-a-file-recursively-in-java
+
+> 인터페이스 및 클래스명 명명규칙
+> https://riehle.org/computer-science/programming/conventions/classes.html
+
+> 잭슨 역직렬화 주의점
+> https://findmypiece.tistory.com/m/104
