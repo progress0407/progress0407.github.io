@@ -128,6 +128,20 @@ ExceptionHandler 에서 모두다 500으로 분기처리하는 것이었다
 예외 메세지가 고정되어서 나간다.  
 즉 코드값은 원하는대로 나가지만 전체적인 포맷이 우리가 원하던 바와 다르게 나간다..
 
+## Change Siganture - Default Value
+
+항상 궁금했는데 크루 로마 덕분에 지레짐작할 수 있었다
+
+![image](https://user-images.githubusercontent.com/66164361/169940593-5e454646-1813-4dce-b0da-8ffe9e862311.png)
+
+위처럼 default value 설정을 하면 해당 값으로 셋팅이 된다
+
+![image](https://user-images.githubusercontent.com/66164361/169940880-64918dfc-abd9-4d29-9e53-7f1ce397fc47.png)
+
+만일 설정하지 않으면 비어진 상태로 깨져있게 된다
+
+![image](https://user-images.githubusercontent.com/66164361/169941025-ee6123db-4247-4191-9138-09f6c19a4a6e.png)
+
 ### 해결...?
 
 결국 개발자에게 가장 금기시 되는 정성의 노가다 기법으로 해결하였다...
