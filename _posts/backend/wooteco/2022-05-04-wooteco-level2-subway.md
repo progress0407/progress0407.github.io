@@ -193,7 +193,121 @@ API 툴을 이용해서 디버거를 찍고 테스트해보았지만... 예측�
 
 라고 쓰면 `value` 에 이 값이 들어가지만 이 값은 `path` 에도 공유될 것이라는 믿음이었다 !
 
-실제로 이 어노테이션을 처리하는 RequestMappingHandler
+실제로 이 어노테이션을 처리하는 RequestMappingHandler은 `value`와 `path`변수가 공유되고 있었다 !
+
+# 작성했던 코드
+
+enum + static method 기반으로 정책 코드를 작성했었다
+
+- 현재는 enum + abstract 메서드 기반으로 변경
+
+```java
+public enum DistanceFarePolicy {
+
+    SHORT_DISTANCE_POLICY(DistanceFarePolicy::shortDistanceCondition, DistanceFarePolicy::calculateShortPolicy),
+    MIDDLE_DISTANCE_POLICY(DistanceFarePolicy::middleDistanceCondition, DistanceFarePolicy::calculateMiddlePolicy),
+    LONG_DISTANCE_POLICY(DistanceFarePolicy::longDistanceCondition, DistanceFarePolicy::calculateLongPolicy);
+
+    private static final int BASIS_FARE = 1_250;
+    private static final int FARE_AT_50KM = 2_050;
+    private static final int FIRST_FARE_INCREASE_STANDARD = 10;
+    private static final int LAST_FARE_INCREASE_STANDARD = 50;
+    private static final int FIRST_FARE_INCREASE_STANDARD_UNIT = 5;
+    private static final int LAST_FARE_INCREASE_STANDARD_UNIT = 8;
+    private static final int INCREASE_RATE = 100;
+
+    private final IntPredicate condition;
+    private final IntUnaryOperator calculator;
+
+    DistanceFarePolicy(IntPredicate condition, IntUnaryOperator calculator) {
+        this.condition = condition;
+        this.calculator = calculator;
+    }
+
+    private static boolean shortDistanceCondition(int distance) {
+        return distance >= 0 && distance <= FIRST_FARE_INCREASE_STANDARD;
+    }
+
+    private static boolean middleDistanceCondition(int distance) {
+        return distance > 0 && distance <= LAST_FARE_INCREASE_STANDARD;
+    }
+
+    private static boolean longDistanceCondition(int distance) {
+        return distance > FIRST_FARE_INCREASE_STANDARD;
+    }
+
+    private static int calculateShortPolicy(int distance) {
+        return BASIS_FARE;
+    }
+
+    private static int calculateMiddlePolicy(int distance) {
+        return BASIS_FARE + INCREASE_RATE *
+                (int) Math.ceil((double) (distance - FIRST_FARE_INCREASE_STANDARD) / FIRST_FARE_INCREASE_STANDARD_UNIT);
+    }
+
+    private static int calculateLongPolicy(int distance) {
+        return FARE_AT_50KM + INCREASE_RATE *
+                (int) Math.ceil((double) (distance - LAST_FARE_INCREASE_STANDARD) / LAST_FARE_INCREASE_STANDARD_UNIT);
+    }
+
+    public IntPredicate condition() {
+        return condition;
+    }
+
+    public IntUnaryOperator calculator() {
+        return calculator;
+    }
+}
+```
+
+```java
+public enum AgeFarePolicy {
+
+    CHILD_AGE_POLICY(AgeFarePolicy::childCondition, AgeFarePolicy::calculateChildPolicy),
+    YOUTH_AGE_POLICY(AgeFarePolicy::youthCondition, AgeFarePolicy::calculateYouthPolicy),
+    ADULT_AGE_POLICY(AgeFarePolicy::adultCondition, AgeFarePolicy::calculateAdultPolicy);
+
+    private final IntPredicate condition;
+    private final IntUnaryOperator calculator;
+
+    AgeFarePolicy(IntPredicate condition, IntUnaryOperator calculator) {
+        this.condition = condition;
+        this.calculator = calculator;
+    }
+
+    private static boolean childCondition(int age) {
+        return age >= 6 && age < 13;
+    }
+
+    private static boolean youthCondition(int age) {
+        return age >= 13 && age < 19;
+    }
+
+    private static boolean adultCondition(int age) {
+        return age >= 19 || (age >= 0 && age < 6);
+    }
+
+    private static int calculateChildPolicy(int amount) {
+        return (int)((amount -350) * 0.5);
+    }
+
+    private static int calculateYouthPolicy(int amount) {
+        return (int)((amount -350) * 0.8);
+    }
+
+    private static int calculateAdultPolicy(int amount) {
+        return amount;
+    }
+
+    public IntPredicate condition() {
+        return condition;
+    }
+
+    public IntUnaryOperator calculator() {
+        return calculator;
+    }
+}
+```
 
 # 참고한 사이트
 
