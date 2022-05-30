@@ -81,64 +81,6 @@ List<LineResponse> lineResponses = (List<LineResponse>) get(LINE).as(ResolvableT
 List<LineResponse> lineResponses = response.jsonPath().getList(".", LineResponse.class);
 ```
 
-## ExceptionResolver 처리하기...
-
-> `DefaultHandlerExceptionResolver` 와 `ExceptionHandlerExceptionResolver` 사이의 어딘가에...
-
-문제의 발단... 분명히 `405` 에러가 나야할 것이 `500` 에러로 클라이언트에 던져진 것... 왜그런가 했더니
-
-ExceptionHandler 에서 모두다 500으로 분기처리하는 것이었다
-
-> 문제의 코드  
-> ![image](https://user-images.githubusercontent.com/66164361/169856695-eacdff93-6715-47d3-a787-e45b78d4ff1f.png)
-
-![image](https://user-images.githubusercontent.com/66164361/169856546-a81caf52-f2fd-4e39-82d7-6aa6ebb401fd.png)
-
-만일 기존의 Exception 객체를 파라미터로 받는 메서드를 주석처리하면 아래와 같이 API 응답을 얻게 된다
-
-![image](https://user-images.githubusercontent.com/66164361/169853559-5308b7d2-d231-49cd-8552-3803cc265528.png)
-
-응답 코드 자체는 원하는 것이지만 메세지가 고객에게 던져주기에는 굉장히 개발자 친화적이다...
-
-`DefaultHandlerExceptionResolver` 로 발생한 에러를 `ExceptionHandlerExceptionResolver`를 통해 처리할 수 없는 것일까...
-
-힌트를 알아보기 위해... 우선 `DefaultHandlerExceptionResolver`를 상속받아서 사용해보기로 하였다
-
-> 우선 상속을 받는다  
-> ![image](https://user-images.githubusercontent.com/66164361/169917653-5164d6e0-8e18-437b-af6d-d761908cbff9.png)
-
-> 이곳이 response의 상태코드가 `200`에서 `405`로 바뀌는 순간이다
-> ![image](https://user-images.githubusercontent.com/66164361/169917664-63d865b2-6f11-4c8c-b0ae-d804f55ae30a.png)
-
-> `DefaultHandlerExceptionResolver`의 아래 메서드로 이동한다
-> ![image](https://user-images.githubusercontent.com/66164361/169917907-92e02f98-7778-4d02-8ad1-d3e80987ae30.png)  
-> ![image](https://user-images.githubusercontent.com/66164361/169918038-d1dbf5a9-23bf-46c9-8427-27dafae43865.png)
-
-> `ResponseFacade`  
-> ![image](https://user-images.githubusercontent.com/66164361/169918238-266bc410-2917-4610-9ff7-45ede77481ab.png)
-
-> `catalina.connector.Response`  
-> ![image](https://user-images.githubusercontent.com/66164361/169918241-1be155da-7d22-46ad-a4ff-b1766ef2de6f.png)
-
-> `coyote.Response`  
-> ![image](https://user-images.githubusercontent.com/66164361/169918472-a888e1db-833b-4c6b-b655-200b2cb88751.png)
-
-문제는 위 과정을 통하게 되면 이후에 어떤 처리를 하든  
-앞서 실행된 `DefaultHandlerExceptionResolver.doResolveException` 메서드에 의해  
-예외 메세지가 고정되어서 나간다.  
-즉 코드값은 원하는대로 나가지만 전체적인 포맷이 우리가 원하던 바와 다르게 나간다..
-
-[스택오버플로의 답변](https://stackoverflow.com/questions/29193190/can-a-generic-exceptionhandler-and-defaulthandlerexceptionresolver-play-nice)을 참고해서 아래처럼 작성해보아도... 원하는 형태의 예외메시지가 담기지는 않는다
-
-![image](https://user-images.githubusercontent.com/66164361/170932155-622db3ae-6bc5-4d35-a8ec-1cd47e840db0.png)
-
-```java
-@RestControllerAdvice
-public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
-    ...
-}
-```
-
 ## Change Siganture - Default Value
 
 항상 궁금했는데 크루 로마 덕분에 지레짐작할 수 있었다
@@ -153,17 +95,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 ![image](https://user-images.githubusercontent.com/66164361/169941025-ee6123db-4247-4191-9138-09f6c19a4a6e.png)
 
-### 해결...?
+## enum 구현 방식을 추상클래스로
 
-결국 개발자에게 가장 금기시 되는 정성의 노가다 기법으로 해결하였다...
+꼭 장점만 있지는 않지만
 
-> ![image](https://user-images.githubusercontent.com/66164361/169920446-e74676d8-2619-44ba-8c02-96ffb56a3183.png)  
-> ![image](https://user-images.githubusercontent.com/66164361/169920468-5324bcc4-9de5-4b8f-8652-683b8aaa5029.png)
+enum + 람다가 아닌 추상클래스 구현일때의 장점은 아래와 같다
 
-### 참고
+- 항목이 많아져도 추가적인 메서드 네이밍을 하지 않아도 된다
 
-> ![image](https://user-images.githubusercontent.com/66164361/169860359-306a296f-5ca3-4b9b-b87e-bfa11d0ef152.png)  
-> 참고로 저렇게 하면 `request`, `response` 객체를 받아올 수 있다...
+- 람다식을 찾기 위해(메서드로 추출되어있다는 전제하에) 선언부/호출부를 들낙거리지 않아도 된다
+
+> https://github.com/woowacourse/atdd-subway-path/pull/296#discussion_r884501518
 
 # 해결되지 않은 의문
 
@@ -206,7 +148,7 @@ API 툴을 이용해서 디버거를 찍고 테스트해보았지만... 예측�
 
 실제로 이 어노테이션을 처리하는 RequestMappingHandler은 `value`와 `path`변수가 공유되고 있었다 !
 
-# 작성했던 코드
+## 시도해본 것
 
 enum + static method 기반으로 정책 코드를 작성했었다
 
@@ -343,6 +285,3 @@ public enum AgeFarePolicy {
 
 > 옵셔널 바르게 쓰기  
 > https://homoefficio.github.io/2019/10/03/Java-Optional-%EB%B0%94%EB%A5%B4%EA%B2%8C-%EC%93%B0%EA%B8%B0/
-
-> default handler 고민  
-> https://stackoverflow.com/questions/29193190/can-a-generic-exceptionhandler-and-defaulthandlerexceptionresolver-play-nice
