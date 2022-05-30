@@ -136,3 +136,7 @@ Servlet 을 준비하는 페어 루키에게 알게된 내용인데...
 응답을 받기 전에 여러번 요청을 주면 그제서야 다른 `HttpServletRequest` 가 찍힌다...
 
 stackoverflow 에서는 알고보니 톰캣이 내부적으로 캐싱등의 최적화를 거친다고 전해 들었다
+
+# 참고 URL
+
+> https://stackoverflow.com/questions/3437897/how-do-i-get-a-class-instance-of-generic-type-t

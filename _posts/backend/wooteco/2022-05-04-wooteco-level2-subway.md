@@ -128,6 +128,17 @@ ExceptionHandler 에서 모두다 500으로 분기처리하는 것이었다
 예외 메세지가 고정되어서 나간다.  
 즉 코드값은 원하는대로 나가지만 전체적인 포맷이 우리가 원하던 바와 다르게 나간다..
 
+[스택오버플로의 답변](https://stackoverflow.com/questions/29193190/can-a-generic-exceptionhandler-and-defaulthandlerexceptionresolver-play-nice)을 참고해서 아래처럼 작성해보아도... 원하는 형태의 예외메시지가 담기지는 않는다
+
+![image](https://user-images.githubusercontent.com/66164361/170932155-622db3ae-6bc5-4d35-a8ec-1cd47e840db0.png)
+
+```java
+@RestControllerAdvice
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+    ...
+}
+```
+
 ## Change Siganture - Default Value
 
 항상 궁금했는데 크루 로마 덕분에 지레짐작할 수 있었다
@@ -332,3 +343,6 @@ public enum AgeFarePolicy {
 
 > 옵셔널 바르게 쓰기  
 > https://homoefficio.github.io/2019/10/03/Java-Optional-%EB%B0%94%EB%A5%B4%EA%B2%8C-%EC%93%B0%EA%B8%B0/
+
+> default handler 고민  
+> https://stackoverflow.com/questions/29193190/can-a-generic-exceptionhandler-and-defaulthandlerexceptionresolver-play-nice
