@@ -66,7 +66,7 @@ mkdir repository
 cd repository
 git clone https://github.com/woowacourse/jwp-shopping-cart.git
 cd jwp-shopping-cart
-./gradlew bootJar #부트 실행
+./gradlew bootJar #jar 파일 생성
 ```
 
 ## 프로젝트 실행
@@ -75,6 +75,16 @@ cd jwp-shopping-cart
 cd build/libs
 java -jar jwp-shopping-cart-0.0.1-SNAPSHOT.jar &
 ```
+
+## 실행시 포트 번호 사용중일 경우
+
+```sh
+lsof -i :8080  # 8080으로 사용중인 포트 번호 검색
+kill -9 {PID 번호}
+```
+
+> 예시  
+> ![image](https://user-images.githubusercontent.com/66164361/170990794-e129f8dc-7460-4380-87b2-dd23c04b16d6.png)
 
 ## 프로젝트 실행 확인하기
 
