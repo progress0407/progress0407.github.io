@@ -98,3 +98,27 @@ curl -X POST "{자신의_인스턴스_주소:포트번호}/api/products" \
 
 절대 키 노출하면 안됀다
 깃헙 푸시할때 키 노출하면 단속된다 !
+
+# 그외 크루들에게 공유받은 자료
+
+### 스컬이 준 자료
+
+터미널로 ec2 접속할때마다 ssh 명령어 입력하기 귀찮으면 이거 한번 해보세요.
+vi aws.c 를 입력해 aws.c라는 파일을 생성한다.
+i를 누르고 아래 코드를 입력한다.
+
+```c
+ #include <stdio.h>
+ #include <stdlib.h>
+
+int main(void) {
+     system("ssh -i key-skull.pem ubuntu@15.164.166.148");
+     return 0;
+}
+
+```
+
+3. 인증서와 IP를 자신걸로 바꾼다.
+4. esc를 누르고 :wq를 입력해 나온다.
+5. gcc -g aws.c -o aws를 입력한다.
+6. ./aws를 입력해 자신의 인스턴스에 접속한다.

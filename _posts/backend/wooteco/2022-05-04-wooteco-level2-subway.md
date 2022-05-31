@@ -285,3 +285,6 @@ public enum AgeFarePolicy {
 
 > 옵셔널 바르게 쓰기  
 > https://homoefficio.github.io/2019/10/03/Java-Optional-%EB%B0%94%EB%A5%B4%EA%B2%8C-%EC%93%B0%EA%B8%B0/
+
+> (알린) util 클래스 및 패키지
+> https://velog.io/@ozragwort/Util-%ED%81%B4%EB%9E%98%EC%8A%A4%ED%8C%A8%ED%82%A4%EC%A7%80
