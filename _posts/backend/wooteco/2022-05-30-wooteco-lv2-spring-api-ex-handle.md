@@ -102,6 +102,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 ![image](https://user-images.githubusercontent.com/66164361/170936605-de9d8c14-33e4-44c7-9880-c42fda624f5d.png)
 
+## `Ambiguous @ExceptionHandler method mapped` 에러
+
+`ResponseEntityExceptionHandler` 를 상속받을 때 발생한 에러인데
+
+`ControllerAdvice` 와 `ResponseEntityExceptionHandler`에서 각각 선언한 `@ExceptionHandler` 가 겹쳐서 발생한 에러이다.
+
+겹치는 부분은 따로 **오버라이드**해서 사용하면 된다.
+
+예를들어 `MethodArgumentNotValidException`를 처리하는 부분이 그럴 수 있다
+
 ## 참고
 
 > ![image](https://user-images.githubusercontent.com/66164361/169860359-306a296f-5ca3-4b9b-b87e-bfa11d0ef152.png)  
@@ -115,3 +125,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 > https://docs.spring.io/spring-framework/docs/5.3.20/javadoc-api/org/springframework/web/servlet/mvc/support/DefaultHandlerExceptionResolver.html  
 > `스프링에서 제공하는 예외를 커스텀하기`  
 > https://docs.spring.io/spring-framework/docs/5.3.20/javadoc-api/org/springframework/web/servlet/mvc/method/annotation/ResponseEntityExceptionHandler.html
+
+> `Ambiguous @ExceptionHandler method mapped` 에러  
+> https://stackoverflow.com/questions/51991992/getting-ambiguous-exceptionhandler-method-mapped-for-methodargumentnotvalidexce  
+> https://velog.io/@litsynp/Getting-Ambiguous-ExceptionHandler-method-mapped-for-XXXException

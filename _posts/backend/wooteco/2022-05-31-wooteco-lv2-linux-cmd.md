@@ -67,6 +67,12 @@ cd build/libs
 java -jar jwp-shopping-cart-0.0.1-SNAPSHOT.jar &
 ```
 
+## 배포명령어 (세션닫아도 유지)
+
+```sh
+nohup java -jar jwp-shopping-cart-0.0.1-SNAPSHOT.jar & >> application.log 2>&1 &
+```
+
 포어 그라운드
 터미널을 점유중인 작업
 
