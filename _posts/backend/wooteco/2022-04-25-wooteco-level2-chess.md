@@ -179,6 +179,13 @@ public class JdbcBoardPieceDao implements BoardPieceDao {
 
 ... 소름이다 Setter를 호출한다...
 
+### `utf8mb4_0900_ai_ci` 보다는 `utf8mb4_general_ci` 를
+
+> 정확한 한글(및 동아시아 언어, 일본어, 중국어) 검색을 처리하기 위해서는 utf8mb4_general_ci 로 설정해야 합니다.
+
+> 참고  
+>  https://rastalion.me/mysql-8-0-1-%EB%B2%84%EC%A0%84%EB%B6%80%ED%84%B0-%EC%B1%84%ED%83%9D%EB%90%9C-utf8mb4_0900_ai_ci%EC%9D%98-%ED%95%9C%EA%B8%80-%EC%82%AC%EC%9A%A9%EC%97%90-%EB%8C%80%ED%95%9C-%EB%AC%B8%EC%A0%9C%EC%A0%90/
+
 ## 그 외
 
 ---

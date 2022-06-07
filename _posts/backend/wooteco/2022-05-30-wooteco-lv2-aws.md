@@ -122,3 +122,33 @@ int main(void) {
 4. esc를 누르고 :wq를 입력해 나온다.
 5. gcc -g aws.c -o aws를 입력한다.
 6. ./aws를 입력해 자신의 인스턴스에 접속한다.
+
+# AWS - 2
+
+> 제이슨 수업
+
+- 사이더 CIDR
+- ping : ip 계층까지 요청이 가는지 확인하는 것 !
+- telnet : port 번호까지!
+- ping `-4` : Use IPv4 only.
+
+![image](https://user-images.githubusercontent.com/66164361/171776472-72f2cd3c-5b6e-4e90-94f8-e17398171b93.png)
+
+- `application.[yml/properties]`에 id/pw 정보는 비워두고
+  - 서버가 run할 때 해당 id/pw 정보가 올라가게끔 해야 한다
+
+![image](https://user-images.githubusercontent.com/66164361/171777396-4cddd2d1-d619-44b5-bbe4-d70d1b7d60bc.png)
+
+![image](https://user-images.githubusercontent.com/66164361/171777406-0e31cc23-429c-4adc-86fa-b6e59ccd98f2.png)
+
+# 제이슨
+
+인스턴스를 껐다 켜도 데이터가 휘발되지 않게 만들기
+페어당 DB EC2 인스턴스는 하나
+이름: ec2-크루1-크루2-db
+VPC: TECHCOURSE
+서브넷: TRAINING
+퍼블릭 IP 자동 할당: 비활성화
+보안 그룹: SG-DEFAULT-DB
+태그: Key: Role, Value: student
+MySQL 접속 정보가 GitHub에 노출되지 않도록 관리하기
