@@ -580,10 +580,24 @@ public void changeItem(Item param) {
 
 service로 넘어온 이 객체는 더티 체킹 등이 되지 않는다 !
 
+### 엔티티에는 setter 대신에 비즈니스 메서드를
+
+모든 필드에 setter가 열려있으면 추적하기 어려워진다.
+
+그렇다고 엔티티는 불변객체가 아닌 변경 가능한 객체로 설계되어있고 변경 감지를 이용해서 객체를 수정할 수 있다.
+
+> 참고  
+> https://www.inflearn.com/questions/86314  
+> https://www.inflearn.com/questions/15944  
+> https://yoonbing9.tistory.com/28
+
 ## 그외
 
 ---
 
 - `p6spy`란 것이 있다 개발 과정에 생기는 쿼리들을 추적할 때 로그를 이쁘게 출력해줄 수 있게끔 해주는 것으로 보인다
+
   - 대신 커스텀하는 게 까다로워 보인다
   - 비용이 비싸기에 운영서버에서는 사용을 금한다
+
+- modelmapper 기능을 이용해서 반복되는 dto to entity 매핑 작업을 줄일 수 있다.
