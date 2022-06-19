@@ -8,6 +8,8 @@ tags: jpa
 comments: true
 ---
 
+# (Hibernate) 성능 최적화
+
 #### JPA에서는 그림과 같이 id가 같으면 동일한 객체로 취급된다
 
 ![image](https://user-images.githubusercontent.com/66164361/156551814-b0f62a5e-a14b-4bdb-989e-f3eb0005e3b7.png)
@@ -79,22 +81,39 @@ Order 클래스의 프로퍼티 `OrderItem` 위에 어노테이션을 걸어주�
 
 - JOIN 결과를 그대로 조회한 후 애플리케이션에서 원하는 모양으로 직접 변환
 
+## (컬렉션 조회) 실무 권장 순서
+
+- 엔티티 조회 방식으로 우선 접근 (v1 ~ v3.1)
+
+  - 페치 조인으로 쿼리수 최적화 (v3, v3.1)
+  - 페이징이 필요할 경우 `batch size` 이용
+
+- 위에서 해결이 안 될 경우 DTO 조회 방식 이용 (v4~v6)
+- 그걸로도 해결이 안 되면 NativeSQL, 스프링 JdbcTemplate 이용
+
 ## OSIV
 
 - Open Session In View
 
 - 엔티티의 영속 상태를 어디까지 살려둘 것인지
 
+트랜잭션이 시작되면 `Entitiy Manager`가 `영속성 컨텍스트`를 열면서 `DB Connection` 을 가져온다  
+이 때 OSIV가 켜져있으면 `Presentation Layer` 까지 커넥션을 물고 있게 된다.  
+하지만 이 덕분에 컨트롤러에서 지연 로딩하는 것이 가능하다
+
 ### OSIV ON
 
 - 컨트롤러와 화면단까지 영속 상태가 살아 있다
-- 따라서 해당 레이어에서 지연 로딩 가능
+  - 따라서 해당 레이어에서 지연 로딩 가능
+  - 굳이 Query를 나누지 않아도 된다.
 - DB 커넥션 자원을 빨리 반환하지 못한다
 
 ### OSIV OFF
 
 - 트랜잭션 종료시 영속 상태를 종료
 - 컨트롤러 레이어, 뷰 등의 지연 로딩을 다 서비스 안쪽으로 넣어야 한다
+- 더 이상 컨트롤러에서 프록시 초기화가 안 된다 !
+  - `org.hibernate.LazyInitializationException: could not initialize proxy [jpa.app.shop.domain.Member#1] - no Session` 발생
 
 ### 커맨드와 쿼리 분리
 
