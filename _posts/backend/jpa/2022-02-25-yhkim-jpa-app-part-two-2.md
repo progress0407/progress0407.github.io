@@ -98,6 +98,7 @@ Order 클래스의 프로퍼티 `OrderItem` 위에 어노테이션을 걸어주�
 - 엔티티의 영속 상태를 어디까지 살려둘 것인지
 
 트랜잭션이 시작되면 `Entitiy Manager`가 `영속성 컨텍스트`를 열면서 `DB Connection` 을 가져온다  
+(그러면서 `setAutoCommit(false)` 를 같이 보낸다! )
 이 때 OSIV가 켜져있으면 `Presentation Layer` 까지 커넥션을 물고 있게 된다.  
 하지만 이 덕분에 컨트롤러에서 지연 로딩하는 것이 가능하다
 
