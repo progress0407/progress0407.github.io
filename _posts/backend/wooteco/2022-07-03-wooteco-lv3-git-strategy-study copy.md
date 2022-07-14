@@ -35,3 +35,9 @@ comments: true
 ### 3. 원격 브랜치 최신화
 
 `git checkout -t origin/main`
+
+### 내 현재 로컬의 refs 를 최신화
+
+`git fetch --prune`
+
+내 현재 로컬의 remote 브랜치 추적 정보를 최신화한다 !
