@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[JWT] Secret Key"
+title: "[JWT] Secret Key 생성하기"
 subtitle: "..."
 date: 2022-08-09 15:30:00 +0900
 categories: backend

@@ -21,3 +21,16 @@ published: true
 `wf.msc` 방화벽 허용 인바운드 규칙
 
 > https://hjw1456.tistory.com/16
+
+### windows에 설치된 Git Bash 명령어 커스텀
+
+bash를 관리자 권한으로 실행한다
+
+`ll /etc/profile.d/` 이곳으로 이동한다
+
+`aliases.sh`을 열어서 명령어를 커스텀한다
+
+git-prompt 파일은 PS1 프롬프트를 커스텀할 수 있는 것으로 보인다
+
+> https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/How-to-customize-Git-Bash-Shell-prompt-settings  
+> https://coding-chobo.tistory.com/72
