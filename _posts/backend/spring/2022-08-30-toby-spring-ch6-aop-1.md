@@ -181,7 +181,7 @@ public class UserServiceImpl implements UserService {
 
 # 프록시, 프록시 패턴, 데코레이터 패턴
 
-## 프록시 
+## 🥝 프록시 
 
 실제 객체 대신에 클라이언트의 요청을 대신 받아주는 것을 proxy라 부른다.
 
@@ -210,16 +210,23 @@ public class UserServiceImpl implements UserService {
     - 쿼리가 나간 횟수를 기록
     - 요청/응답 값을 중간에 변경
 
-## 데코레이터 패턴 
-
+## 🥝 데코레이터 패턴 
 
 객체에 기능을 동적으로 추가가 가능하다
 
-- 사용된 곳 : `Collections.unmodifiable();`
+> 데코레이터 패턴 예
 
-## 프록시 패턴
+```java
+InputStream is = new BufferedInputStream(new FileInputStream("a.txt"));
+```
+
+## 🥝 프록시 패턴
 
 접근 제어를 할 수 있다. 토비님 설명으로 타깃의 기능을 확장하거나 추가하지는 않는다고 한다... 
+
+- 사용된 곳 
+  - `Collections.unmodifiable();`
+  - JPA의 지연로딩 시 사용되는 Proxy 객체
 
 그러나 필자가 보기에는 프록시 패턴 또한 가능한 것으로 보인다.
 
@@ -442,8 +449,7 @@ class TransactionHandlerTest {
 }
 ```
 
-
-## 다이나믹 프록시를 위한 팩토리 빈
+## 🥝 다이나믹 프록시를 위한 팩토리 빈
 
 내용이 너무 어렵다!
 
@@ -461,7 +467,7 @@ Date now = (Date) Class.forName("java.util.Date").newInstance();
 ![image](https://user-images.githubusercontent.com/66164361/187367552-2cfc7cee-18fe-4f08-9516-99b343313a5f.png)
 ![image](https://user-images.githubusercontent.com/66164361/187367591-9130381f-a28a-4012-be7c-12e04ef5c5e9.png)
 
-## 팩토리 빈
+## 🥝 팩토리 빈
 
 크게 어려운 것 없다 !
 
@@ -519,7 +525,7 @@ class HelloTargetFactoryBeanTest {
 
 ```java
 @Setter
-public class TxProxyFactoryBean implements FactoryBean<Object> { /
+public class TxProxyFactoryBean implements FactoryBean<Object> {
     Object target;
     PlatformTransactionManager transactionManager;
     String pattern;
@@ -554,7 +560,7 @@ public class TxProxyFactoryBean implements FactoryBean<Object> { /
 
 ## 프록시 팩토리 빈의 단점
 
-1. 설정에 중복 대거 등장
+1. 설정에 생기는 비약적인 중복
 
 책 기준으로는 XML이지만.. 자바 코드상에 아래와 같은 중복 로직이 대거 등장하게 된다!
 
@@ -581,7 +587,7 @@ static class Config {
 }
 ```
 
-2. 거의 같은 역할을 하는 객체 대거 생성
+2. 거의 같은 역할을 하는 객체가 생성
 
 또 다른 문제점은 TransactionHandler, 즉 프록시 객체가 proxy factory bean 갯수 만큼 만들어진다.
 
