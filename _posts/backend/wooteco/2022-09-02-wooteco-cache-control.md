@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "우테코 웹의 캐시"
+title: "[wooteco] 웹의 캐시"
 subtitle: "..."
 date: 2022-09-02 15:00:00 +0900
 categories: backend

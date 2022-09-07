@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "우테코 레벨2 땅콩 박스 만들기"
+title: "[wooteco] level2 땅콩 박스 만들기"
 subtitle: "..."
 date: 2022-05-06 00:00:00 +0900
 categories: backend
@@ -114,6 +114,8 @@ comments: true
 
 - `request` 스코프 별도 처리
   - 알고 있던 내용과 다르게 실상 컨트롤러로 넘어오는 request객체는 거의 매번 같은 객체가 도착해서 별도 처리를 해주었다
+  - 정확히는 앞에 있던 요청을 완전히 끝내고 후 요청을 보내면, 두 요청의 Request객체 해시값이 같다.
+  - 앞에 있는 요청을 수행 중에 다른 요청을 보내면 두 요청의 해시 값이 다르다.
 
 본래라면 PenutLifeCycle 클래스의 enum 분기문은 아래처럼 처리되었을 것이다
 
