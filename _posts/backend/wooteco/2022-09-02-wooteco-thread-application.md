@@ -116,3 +116,24 @@ Th-A는 유효성 검증을 이미 통과하였기 때문에 결국에는 user�
   - 작업 큐의 개수
 - max-connections
   - 최대 연결의 갯수
+
+
+
+# 기타 알게된 내용 
+
+> https://stackoverflow.com/questions/24678661/tomcat-maxthreads-vs-maxconnections  
+
+7.0은 BIO를 Default로 사용하나, NIO가 모든 면에서 더 낫다고 얘기됨
+8.5부터 완전히 NIO 기반
+
+
+> https://ehdvudee.tistory.com/30  
+
+개인 메모: Tomcat 튜닝 가이드
+한글로 되어 있어서 좋다 !
+
+> 스프링부트는 어떻게 다중 유저 요청을 처리할까? (Tomcat9.0 Thread Pool)  
+> https://velog.io/@sihyung92/how-does-springboot-handle-multiple-requests  
+
+> BIO, NIO Connector Architecture in Tomcat  
+> https://velog.io/@jihoson94/BIO-NIO-Connector-in-Tomcat  
