@@ -173,6 +173,7 @@ However if your game is indeed very "busy", it's your CPU that you need to worry
 > https://velog.io/@sihyung92/how-does-springboot-handle-multiple-requests  
 
 > BIO, NIO Connector Architecture in Tomcat  
+> Connector의 변경사항 (9.0 dropped the BIO Connector)
 > https://velog.io/@jihoson94/BIO-NIO-Connector-in-Tomcat  
 
 > 오라클 동기화 번역본  
@@ -182,7 +183,7 @@ However if your game is indeed very "busy", it's your CPU that you need to worry
 > https://leeyh0216.github.io/posts/truth_of_threadpoolexecutor/
 
 > 이곳을 통해 maxThread를 설정하는게 worker thread를 설정하는 것으로 알 수 있다  
-https://github.com/apache/tomcat/blob/8301307ce76540e92c6068d8277038d133da862c/java/org/apache/tomcat/util/net/AbstractEndpoint.java#L1120
+> https://github.com/apache/tomcat/blob/8301307ce76540e92c6068d8277038d133da862c/java/org/apache/tomcat/util/net/AbstractEndpoint.java#L1120
 
 > Worker에 대한 설명이 있다, 설명이 많고 어렵  
 > https://blog.actorsfit.com/a?ID=00500-fff6744c-2f08-436f-a448-90b8a9105166  
