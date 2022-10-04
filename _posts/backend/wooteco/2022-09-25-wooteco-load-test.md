@@ -112,3 +112,14 @@ BIO를 default로 사용하고 있는 톰캣 버전은 7.0.x이다. 해당 버�
 
 수많은 취약점은 뒤로하고...
 우선 build.gradle 로 import 하는 것부터 쉽지가 않았다 ㅠ
+
+# 참고
+
+> 서버가 죽는 이유  https://ozofweird.tistory.com/entry/GCP-%EC%9B%90%EB%8D%B0%EC%9D%B4-%EC%84%9C%EB%B2%84%EA%B0%80-%EC%A3%BD%EB%8A%94-%EC%9D%B4%EC%9C%A0-Message-Queue  
+> 넷플릭스 고가용성  http://devsonic.blogspot.com/2016/12/netflix-tomcat.html  
+> HikariCP Dead lock에서 벗어나기 (실전편)  https://techblog.woowahan.com/2663/  
+> Socket Time Out  https://jojoldu.tistory.com/526  
+> Hikari 공식 문서  https://bugoverdose.github.io/docs/database-connection-pool-sizing/  
+> 내가 만든 서비스는 얼마나 많은 사용자가 이용할 수 있을까?  https://hyuntaeknote.tistory.com/12  
+> BIO vs NIO  https://stackoverflow.com/questions/11032739/what-is-the-difference-between-tomcats-bio-connector-and-nio-connector
+> tomcat  https://techblog.bozho.net/tomcats-default-connectors/   
