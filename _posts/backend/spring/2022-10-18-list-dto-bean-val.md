@@ -9,6 +9,11 @@ comments: true
 published: true
 ---
 
+### 참고
+
+> https://stackoverflow.com/questions/28150405/validation-of-a-list-of-objects-in-spring
+
+
 `단일 DTO`나 `DTO로 감싼 일급컬렉션`의 경우 Bean Validation이 적용이 됩니다.
 
 하지만 List of DTO는 그렇지 않은데요! (정확한 건 아래의 예시)
