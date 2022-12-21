@@ -84,3 +84,84 @@ published: true
 
 **따라서 서비스 하나에 대해 하나의 컨테이너만을 사용하기로 결정헀다**
 
+## 도커 관련 사항
+
+- 컨테이너에 포트 추가하기
+
+이게... stop/start (생성된 컨테이너 on off) 명령어로는 포트를 추가할 수 없다.
+
+따라서 컨테이너를 버전 업 하는 방식으로 진행해야 한다. (정확한 표현은 아니고 느낌은 이러했다)
+
+```bash
+docker stop {컨테이너 명} # 컨테이너 이름이 없다면, 컨테이너 ID(해시)로 대체 가능
+docker commit {컨테이너 명}
+```
+
+여기서 생성된 이미지 기준으로 `run` 명령어를 통해 새로운 컨테이너를 추가하면 된다
+
+## 도커 네이밍
+
+이것 역시 컨벤션이 있다. 아래와 같다.
+
+`{docker hub id}/{repository name}:{version}`
+
+나의 경우 아래로 네이밍 했다.
+`progress0407/checkmate:2022-1222-1`
+
+`docker hub id`: progress0407이 나의 도커 허브 ID이다
+`repository name`: 이 부분이 참 애매하다... 리포지토리, 프로젝트 최상단 명칭이 moragora인데... 그러나 마지막 프로젝트명인 checkmate로 했다
+`version`: latest 혹은 22.04 등으로 명시하지만... 나는 일자 + 일련번호로 했다. 일련번호는 해당일에 대해 추가 커밋이 있는 경우 +1을 하기로 했다.
+
+
+## MySQL 관련 사항
+
+- [한글, 이모티콘 입력 가능한 DB 만들기](https://zibsin.net/1754)
+
+```sql
+create database `checkmate-db` default character set utf8mb4 collate utf8mb4_general_ci;
+```
+
+사용자 생성
+
+```sql
+create user `checkmate-user`@'%' identified by {비번};
+```
+
+권한 부여 (편의상 모든 권한을 주었다. DDL 마저도...)
+
+```sql
+grant all privileges on `checkmate-db`.* to `checkmate-user`@'%';
+```
+
+### Redis
+
+레디스 기본 포트: `default 6379 and additionally 16379`
+
+## Git 전략 (?)
+
+결론부터 말하면 포크 프로젝트에 neo라는 새로운 브랜치를 만들어서 진행했다.
+
+기존에는 Git 전략과 Github 전략을 혼합하여 사용했다.
+
+현재는 포크 프로젝트의 `neo`란 브랜치를 만들어서 사용하기로 했다.
+
+(`neo`는 새로운이란 뜻으로 생각해서 사용)
+
+이렇게 한 이유는 매번 소통이 발생하면 굉-장히 오랜 시간을 들여서 작업해야할 수 있기 때문이다...
+
+사실상 팀프로젝트가 끝나서 이렇게 하기로 했다.
+
+## Submodule 변경 사항
+
+기존에 있던 prod, dev, local을 최대한 덜 수정하는 방향으로 작업하기로 했다.
+
+대신에 ec2에서 운영할 `neo-prod`와 로컬에서 사용할 `neo-local` 설정을 추가하였다.
+
+## 문제 사항
+
+### ec2 먹통 현상
+
+이해가 되지 않는 현상이다. 상당히 높은 빈도로 CPU 과부화 되면서 멈춘다.
+
+혹시 모르지만 docker의 영향이 있던 걸까? WAS, DB, Redis등 종합적으로 비대해지다 보니 이런 일이 발생한 걸까? 아직 알아가는 중이다.
+
