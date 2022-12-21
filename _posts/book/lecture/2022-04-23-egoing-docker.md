@@ -152,9 +152,9 @@ Docker 의 외부는 Host고 내부는 Container다
 
 ## 호스트와 컨테이너 사이간 디렉터리 연결하기
 
-> docker run -p 7080:80 --name ws2 -v /c/dev/test-projects/egoing/docker/htocs:/usr/local/apache2/htdocs/ httpd
-> docker run -p 7080:80 --name ws2 -v C:\dev\test-projects\egoing\docker\htocs:/usr/local/apache2/htdocs/ httpd
-> docker run -p 7080:80 --name ws2 -v /c/dev/test-projects/egoing/docker/htocs:/usr/local/apache2/htdocs/:z httpd
+> docker run -p 7080:80 --name ws2 -v /c/dev/test-projects/egoing/docker/htocs:/usr/local/apache2/htdocs/ httpd  
+> docker run -p 7080:80 --name ws2 -v C:\dev\test-projects\egoing\docker\htocs:/usr/local/apache2/htdocs/ httpd  
+> docker run -p 7080:80 --name ws2 -v /c/dev/test-projects/egoing/docker/htocs:/usr/local/apache2/htdocs/:z httpd  
 
 - `v` 볼륨을 `현재경로`:`원격경로`
 
