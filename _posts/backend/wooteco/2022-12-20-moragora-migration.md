@@ -84,9 +84,14 @@ published: true
 
 **따라서 서비스 하나에 대해 하나의 컨테이너만을 사용하기로 결정헀다**
 
+> 참고
+> https://www.daleseo.com/docker-networks/
+
 ## 도커 관련 사항
 
-- 컨테이너에 포트 추가하기
+docker를 다루면서 고통받은 일들을 기록하였다.
+
+## 컨테이너에 포트 추가하기 by Version-Up
 
 이게... stop/start (생성된 컨테이너 on off) 명령어로는 포트를 추가할 수 없다.
 
@@ -95,7 +100,12 @@ published: true
 ```bash
 docker stop {컨테이너 명} # 컨테이너 이름이 없다면, 컨테이너 ID(해시)로 대체 가능
 docker commit {컨테이너 명}
+# ex
+docker commit server progress0407/checkmate:2022-1226-1
 ```
+
+> 참고
+> https://medium.com/sjk5766/%EC%8B%A4%ED%96%89%EC%A4%91%EC%9D%B8-container%EC%97%90-port-or-volume-%EC%B6%94%EA%B0%80-ae8889344c68
 
 여기서 생성된 이미지 기준으로 `run` 명령어를 통해 새로운 컨테이너를 추가하면 된다
 
@@ -112,6 +122,7 @@ docker commit {컨테이너 명}
 `repository name`: 이 부분이 참 애매하다... 리포지토리, 프로젝트 최상단 명칭이 moragora인데... 그러나 마지막 프로젝트명인 checkmate로 했다
 `version`: latest 혹은 22.04 등으로 명시하지만... 나는 일자 + 일련번호로 했다. 일련번호는 해당일에 대해 추가 커밋이 있는 경우 +1을 하기로 했다.
 
+> [참고, 태그로 rename](https://miiingo.tistory.com/332)
 
 ## MySQL 관련 사항
 
@@ -133,7 +144,7 @@ create user `checkmate-user`@'%' identified by {비번};
 grant all privileges on `checkmate-db`.* to `checkmate-user`@'%';
 ```
 
-### Redis
+## Redis
 
 레디스 기본 포트: `default 6379 and additionally 16379`
 
@@ -156,6 +167,29 @@ grant all privileges on `checkmate-db`.* to `checkmate-user`@'%';
 기존에 있던 prod, dev, local을 최대한 덜 수정하는 방향으로 작업하기로 했다.
 
 대신에 ec2에서 운영할 `neo-prod`와 로컬에서 사용할 `neo-local` 설정을 추가하였다.
+
+## Nginx 사항
+
+### unknown directive "proxy_path" in {설정 경로}
+
+**결론, 오타가 있었다. `path` -> `pass`**
+
+예제를 따라하면서 작업했었는데, proxy_path라는 예약어를 인식하지 못하는 것 같았다.
+
+- https://stackoverflow.com/questions/36011581/nginx-unknown-directive-proxy-pass
+
+아래글을 따라서 설정을 건드려보았지만 잘 되지는 않았다.
+
+`proxy_path`가 아닌 `proxy_pass`였다
+
+> host not found in upstream "localhost80" in {설정 경로}
+
+이제 메시지가 변경되었다.
+
+자세히 보니 또 오타가 있었다. `localhost80`
+
+수정후 정상 재기동되었다.
+
 
 ## 문제 사항
 
