@@ -144,9 +144,30 @@ create user `checkmate-user`@'%' identified by {비번};
 grant all privileges on `checkmate-db`.* to `checkmate-user`@'%';
 ```
 
+## HTTPS 적용 문제 (in Docker)
+
+Docker를 사용하기 위해서 Certbot란 프로그램을 설치해야 한다.
+
+그러나 이 과정이 순탄하지 않다.
+
+여러가지 시도를 해보았고 마지막 시도로 지금까지의 이미지를 docker-compose 기반으로 certbot와 함께 새로운 컨테이너를 만드려고 하였다.
+
+그러나 결국은 인내심의 종지부를 찍었다 ㅠㅠ...!!
+
+![image](https://user-images.githubusercontent.com/66164361/209717747-90d8f629-3ec0-4251-96b1-38892df56854.png)
+
+![image](https://user-images.githubusercontent.com/66164361/209717810-11b35077-75e3-42ec-9c0d-757a73838886.png)
+
+생각한 그림은 한 컨테이너 내부에 WS, WAS, Redis 등 모든 것을 넣는 것이었다.
+
+컨테이너가 n개 생성된 시점에서부터 포기하기로 하였다.
+
 ## Redis
 
 레디스 기본 포트: `default 6379 and additionally 16379`
+
+- [Redis Session 스토리지 이용](https://escapefromcoding.tistory.com/702)
+- https://stackoverflow.com/questions/7537905/how-to-set-password-for-redis
 
 ## Git 전략 (?)
 
@@ -190,6 +211,28 @@ grant all privileges on `checkmate-db`.* to `checkmate-user`@'%';
 
 수정후 정상 재기동되었다.
 
+### Nginx 403 Faild
+
+필자의 경우 권한문제였다
+
+`chmod`, `chown` 을 체크해보자!
+
+nginx가 찾는 경로 중 어느 하나라도 권한 문제가 있을 경우에 정상적으로 File을 Serving못할 수 있다!
+
+
+## 프론트 앱 배포
+
+- 프론트 루트 디렉터리에 .env파일에 아래 정보를 기입한다.
+
+```
+API_SERVER_HOST={API 서버 URI}
+CLIENT_ID={구글 OAuth 관련 ID}
+```
+
+```shell
+npm run build
+# npm run start  # 이러면 nginx를 거치지 않고 바로 배포
+```
 
 ## 문제 사항
 
@@ -199,3 +242,8 @@ grant all privileges on `checkmate-db`.* to `checkmate-user`@'%';
 
 혹시 모르지만 docker의 영향이 있던 걸까? WAS, DB, Redis등 종합적으로 비대해지다 보니 이런 일이 발생한 걸까? 아직 알아가는 중이다.
 
+### HTTPS 적용 후 접근 불가
+
+처음에는 80 포트에 접근이 불가했다. 뒤이어서 22번 포트도 접근이 불가능해서 인프라 작업을 할 수 없었다.
+
+아직 원인을 파악하지 못했기 때문에 알아보는 중이다!
