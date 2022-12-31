@@ -45,3 +45,56 @@ ufw 를 활성화(`ufw enable`) 후 `ufw status`로 확인해서 SSH가 허용�
 
 그렇지 않을 경우 터미널로 접속할 수 없다!!
 
+## 알게된 사항 메모
+
+### **★★ufw 작업시 22번 포트를 열자**
+
+**정말 정말 중요하다!!!**
+
+방화벽을 enable 하면 이 순간 22번 포트에 대한 접근도 끊기는 것으로 보인다. 바로 열어줘야 한다!
+
+[깨닫게 해준 블로그](https://milkye.tistory.com/343)
+
+### npm build 퍼센트 안 올라갈 때
+
+빌드시 사용되는 RAM이 부족한 걸로 보인다.
+
+swap을 적용하니 바로 되는 것을 확인할 수 있었다.
+
+### Test 제외하고 Build 하기
+
+```sh
+./gradlew build -x test
+```
+
+### 혼합된 콘텐츠 차단
+
+크롬에서는 HTTPS와 HTTP가 혼용된 경우 컨텐츠를 차단한다.
+
+![image](https://user-images.githubusercontent.com/66164361/210137555-61fb213f-b949-45b4-b53d-cb90e9893942.png)
+
+나의 경우 정적 자원 제공은 HTTPS, API요청은 8080으로 되어있었다. (하나의 ec2에 있기 떄문...)
+
+따러서 HTTPS 요청이되, uri path로 분기되게끔 처리를 바꾸었다. (테스트용 API 하나에 대해서만 처리했다)
+
+![image](https://user-images.githubusercontent.com/66164361/210138235-0905099d-c47d-42c6-a6a3-f8972b2595f9.png)
+
+감격.. 드디어 로그인이 된다 ... (어휴) ㅋㅋㅋ
+
+
+## 배포
+
+![image](https://user-images.githubusercontent.com/66164361/210138934-b8aec947-cd95-4e39-8fe4-550c6d4cb8b1.png)
+
+드디어 되었다.
+
+개인적인 시도와 기존과 마이그레이션 전략 등을 생각하다 보니 많이 늦은 것 같다... ~~(많이 놀기도 했구...)~~
+
+백엔드는 괜찮지만 필요할 때는 프론트 친구들이 활용을 곧잘 하곘지...?
+
+난 이만...
+
+## 기타
+
+[nginx guide](https://idroot.us/install-nginx-with-lets-encrypt-ubuntu-22-04/)
+
