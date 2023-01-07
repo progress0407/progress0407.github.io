@@ -247,3 +247,10 @@ npm run build
 처음에는 80 포트에 접근이 불가했다. 뒤이어서 22번 포트도 접근이 불가능해서 인프라 작업을 할 수 없었다.
 
 아직 원인을 파악하지 못했기 때문에 알아보는 중이다!
+
+## 참고 자료
+
+- [도커 공식 문서: 설명이 잘 되어있다.](https://docs.docker.com/engine/reference/commandline/run/)
+- 인프런: 따라하며 배우는 도커와 CI환경
+- [HTTPS: UI가 이쁨](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-22-04)
+- [Docker 네트워크 사용법](https://www.daleseo.com/docker-networks/)

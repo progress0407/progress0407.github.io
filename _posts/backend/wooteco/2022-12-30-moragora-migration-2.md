@@ -94,7 +94,9 @@ swap을 적용하니 바로 되는 것을 확인할 수 있었다.
 
 난 이만...
 
+- [마이그레이션 Git Issue](https://github.com/woowacourse-teams/2022-moragora/issues/597)
+
 ## 기타
 
-[nginx guide](https://idroot.us/install-nginx-with-lets-encrypt-ubuntu-22-04/)
+- [nginx guide](https://idroot.us/install-nginx-with-lets-encrypt-ubuntu-22-04/)
 
